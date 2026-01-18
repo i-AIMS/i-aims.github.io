@@ -183,7 +183,8 @@ body {
 }
 
 .footer-license a,
-.blog-content a {
+.blog-content a,
+.blog-author a {
   color: var(--teal);
   text-decoration: none;
 }
