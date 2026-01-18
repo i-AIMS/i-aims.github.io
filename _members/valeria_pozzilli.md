@@ -1,5 +1,6 @@
 ---
 name: Valeria Pozzilli
+slug: valeria-pozzilli
 role: MS Neurologist and Research Fellow
 affiliation: Queen Square Institute of Neurology, UCL, London, UK; Campus Bio-Medico University, Rome, Italy
 photo: /assets/members/ValeriaPozzilli.jpeg

@@ -1,5 +1,6 @@
 ---
 name: Tommy Broeders
+slug: tommy-broeders
 role: Postdoctoral researcher
 affiliation: Amsterdam UMC, location VUmc, Netherlands
 photo: /assets/members/TommyBroeders.jpg

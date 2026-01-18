@@ -1,6 +1,7 @@
 ---
 title: "AI in MS: Trying to Keep Up"
 author: Valeria Pozzilli
+author_id: valeria-pozzilli
 author_photo: /assets/members/ValeriaPozzilli.jpeg
 author_url: /members/#Valeria-Pozzilli
 affiliation: Queen Square Institute of Neurology, UCL, London, UK; Campus Bio-Medico University, Rome, Italy

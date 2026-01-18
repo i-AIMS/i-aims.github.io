@@ -10,7 +10,7 @@ permalink: /members/
   <div class="members-grid">
     {% assign sorted = site.members | sort: "name" %}
     {% for member in sorted %}
-      <div class="member-card">
+      <div class="member-card" id="{{ member.slug }}">
 
         <img
           src="{{ member.photo }}"

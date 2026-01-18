@@ -1,5 +1,6 @@
 ---
 name: Stijn Denissen
+slug: stijn-denissen
 role: Postdoctoral researcher
 affiliation: Vrije Universiteit Brussel, Belgium
 photo: /assets/members/Stijn.jpg

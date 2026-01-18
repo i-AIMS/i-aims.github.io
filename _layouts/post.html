@@ -17,16 +17,22 @@ layout: default
       {% endif %}
 
       <div>
+        {% assign author = site.members | where: "slug", page.author_id | first %}
+
         <p class="blog-author">
-          {% if page.author_url %}
-            <a href="{{ page.author_url }}">{{ page.author }}</a>
+          {% if author %}
+            <a href="/members/#{{ author.slug }}">
+              {{ author.name }}
+            </a>
           {% else %}
             {{ page.author }}
           {% endif %}
         </p>
 
-        {% if page.affiliation %}
-          <p class="blog-affiliation">{{ page.affiliation }}</p>
+        {% if author and author.affiliation %}
+          <p class="blog-affiliation">
+            {{ author.affiliation }}
+          </p>
         {% endif %}
 
         <p class="blog-date">

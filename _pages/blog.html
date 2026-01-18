@@ -26,9 +26,13 @@ permalink: /blog/
             <a href="{{ post.url }}">{{ post.title }}</a>
           </h2>
 
+          {% assign author = site.members | where: "slug", post.author_id | first %}
+
           <p class="blog-meta">
-            {% if post.author_url %}
-              <a href="{{ post.author_url }}">{{ post.author }}</a>
+            {% if author %}
+              <a href="/members/#{{ author.slug }}">
+                {{ author.name }}
+              </a>
             {% else %}
               {{ post.author }}
             {% endif %}

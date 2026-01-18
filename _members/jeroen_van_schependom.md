@@ -1,5 +1,6 @@
 ---
 name: Jeroen Van Schependom
+slug: jeroen-van-schependom
 role: Research Professor
 affiliation: Vrije Universiteit Brussel, Belgium
 photo: /assets/members/JeroenVanSchependom.jpeg

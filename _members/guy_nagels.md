@@ -1,5 +1,6 @@
 ---
 name: Guy Nagels
+slug: guy-nagels
 role: Professor of digital medicine
 affiliation: Vrije Universiteit Brussel, Belgium
 photo: /assets/members/GuyNagels.jpg
