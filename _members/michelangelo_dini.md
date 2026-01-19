@@ -3,6 +3,7 @@ name: Michelangelo Dini
 slug: michelangelo-dini
 role: Psychologist, Postdoctoral researcher
 affiliation: Casa di Cura Igea, Milan, Italy
+country: Italy
 photo: /assets/members/MichelangeloDini.png
 bio: >
   Psychologist specialised in cognitive assessment in neurological disorders. Passionate about digital technology and AI. In a previous life I was a rock guitarist.

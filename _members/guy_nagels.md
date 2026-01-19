@@ -3,6 +3,7 @@ name: Guy Nagels
 slug: guy-nagels
 role: Professor of digital medicine
 affiliation: Vrije Universiteit Brussel, Belgium
+country: Belgium
 photo: /assets/members/GuyNagels.jpg
 bio: >
   Serious MS Neurologist

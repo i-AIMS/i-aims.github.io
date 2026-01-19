@@ -3,6 +3,7 @@ name: Stijn Denissen
 slug: stijn-denissen
 role: Postdoctoral researcher
 affiliation: Vrije Universiteit Brussel, Belgium
+country: Belgium
 photo: /assets/members/Stijn.jpg
 bio: >
   Physiotherapist by training, undercover agent among the AI developers. Triathlete, guitarist, nearly-dad.

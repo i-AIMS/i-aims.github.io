@@ -1,0 +1,10 @@
+---
+---
+[
+  {% for member in site.members %}
+  {
+    "name": "{{ member.name | escape }}",
+    "country": "{{ member.country | escape }}"
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]

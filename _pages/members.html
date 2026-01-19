@@ -7,6 +7,8 @@ permalink: /members/
 <section class="section">
   <h1>Community Members</h1>
 
+  <div id="members-map" style="height:380px; margin-bottom:3rem;"></div>
+
   <div class="members-grid">
     {% assign sorted = site.members | sort: "name" %}
     {% for member in sorted %}
@@ -87,3 +89,6 @@ permalink: /members/
     {% endfor %}
   </div>
 </section>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="{{ '/assets/js/members-map.js' | relative_url }}"></script>

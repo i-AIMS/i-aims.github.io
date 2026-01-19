@@ -3,6 +3,7 @@ name: Jeroen Van Schependom
 slug: jeroen-van-schependom
 role: Research Professor
 affiliation: Vrije Universiteit Brussel, Belgium
+country: Belgium
 photo: /assets/members/JeroenVanSchependom.jpeg
 bio: >
   Physics engineer focusing on cognitive impairment in MS. Dad of three, sleep of half.

@@ -3,6 +3,7 @@ name: Alessia Bianchi
 slug: alessia-bianchi
 role: Post-Doc Clinical Research Fellow
 affiliation: University of Siena, Italy / University College London, UK
+country: Italy
 photo: /assets/members/AlessiaBianchi.jpg
 bio: >
   Neurologist by training, working at the intersection of neuroimaging and AI. Passionate about art, and usually found running when not chasing data.
