@@ -24,9 +24,17 @@
       {% endif %}
 
       {% if event.location %}
-        📍 {{ event.location }}
+        📍 {{ event.location }}<br>
       {% else %}
         📍 TBA <br>
+      {% endif %}
+
+      {% if event.recording %}
+      <a href="{{ event.recording }}"
+           target="_blank" rel="noopener"
+           aria-label="iAIMS YouTube channel">
+          <i class="fa-brands fa-youtube"></i> Watch recording
+      </a>
       {% endif %}
   </p>
 

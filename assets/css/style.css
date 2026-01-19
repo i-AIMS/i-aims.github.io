@@ -249,6 +249,10 @@ body {
 }
 
 /* Icon colors */
+.fa-youtube {
+  color: #cc181e;
+}
+
 .member-icon {
   color: #666666;
 }
@@ -392,6 +396,21 @@ body {
 
 .event-link {
   margin-top: 0.75rem;
+}
+
+/* Media */
+.media-placeholder {
+  margin-top: 3rem;
+  padding: 2.5rem;
+  text-align: center;
+  border-radius: 14px;
+  background: var(--light);
+}
+
+.media-placeholder i {
+  font-size: 3rem;
+  color: #FF0000;
+  margin-bottom: 1rem;
 }
 
 

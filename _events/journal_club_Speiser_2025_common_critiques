@@ -7,6 +7,7 @@ location: "Online"
 type: "Journal Club"
 status: "upcoming"
 #link: "https://iaims.org/events/"       # Complete and uncomment if we have a join link
+#recording: "https://link/to/recording"
 ---
 
 We are planning our first iAIMS Journal Club, in which lead author [Prof. Jaime Lynn Speiser](https://school.wakehealth.edu/faculty/s/jaime-lynn-speiser) will discuss the following paper:
