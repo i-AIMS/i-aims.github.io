@@ -3,7 +3,7 @@ name: Mar Barrantes Cepas
 slug: mar-barrantes-cepas
 role: PhD candidate
 affiliation: Amsterdam UMC, location VUmc, Amsterdam, The Netherlands
-country: The Netherlands
+country: Netherlands
 photo: /assets/members/MarBarrantes.png
 bio: >
   Physicist and neuroscientist focused on the network-level effects of multiple sclerosis pathology on brain and cognition using MRI. 

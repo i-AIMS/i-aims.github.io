@@ -3,7 +3,7 @@ name: Tommy Broeders
 slug: tommy-broeders
 role: Postdoctoral researcher
 affiliation: Amsterdam UMC, location VUmc, Netherlands
-country: The Netherlands
+country: Netherlands
 photo: /assets/members/TommyBroeders.jpg
 bio: >
   Cognitive neuroscientist with a deep interest in computational approaches and network science. Fascinated about our dynamic brain. Climber, runner and gadget collector.
