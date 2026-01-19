@@ -5,7 +5,7 @@ role: Post-Doc Clinical Research Fellow
 affiliation: University of Siena, Italy / University College London, UK
 photo: /assets/members/AlessiaBianchi.jpg
 bio: >
-  Neurologist by training, working at the intersection of neuroimaging and AI.Passionate about art, and usually found running when not chasing data.
+  Neurologist by training, working at the intersection of neuroimaging and AI. Passionate about art, and usually found running when not chasing data.
 links:
   mail: mailto:alessia.bianchi2@unisi.it / a.bianchi@ucl.ac.uk
   linkedin: https://www.linkedin.com/in/alessia-bianchi-505728244/
