@@ -1,16 +1,16 @@
 ---
 title: "Prof. Jaime Lynn Speiser - ML Methods in Neurology"
-#date: 2026/12/31                        # Uncomment and complete YYYY/MM/DD if we have a date
-#time: "24:00"                           # Uncomment and complete "Hh:Mm" if we have a time
-#timezone: "CET"                         # Uncomment and complete "three-letter timezone" if we have a time
+date: 2026/01/30                        # Uncomment and complete YYYY/MM/DD if we have a date
+time: "16:00"                           # Uncomment and complete "Hh:Mm" if we have a time
+timezone: "CET"                         # Uncomment and complete "three-letter timezone" if we have a time
 location: "Online"
 type: "Journal Club"
 status: "upcoming"
-#link: "https://iaims.org/events/"       # Complete and uncomment if we have a join link
+link: "https://teams.microsoft.com/l/meetup-join/19%3ameeting_YTRjMjY0OTktMWY1NC00Njc3LTg1N2YtODdlZDZjNTY2MDg2%40thread.v2/0?context=%7b%22Tid%22%3a%22695b7ca8-2da8-4545-a2da-42d03784e585%22%2c%22Oid%22%3a%22d4a2c2c8-65ca-485b-aff3-3499f9442af0%22%7d"       # Complete and uncomment if we have a join link
 #recording: "https://link/to/recording"
 ---
 
-We are planning our first iAIMS Journal Club, in which lead author [Prof. Jaime Lynn Speiser](https://school.wakehealth.edu/faculty/s/jaime-lynn-speiser) will discuss the following paper:
+We are planning our first iAIMS Journal Club, in which lead author [Prof. Jaime Lynn Speiser](https://school.wakehealth.edu/faculty/s/jaime-lynn-speiser) will discuss the following paper 📝:
 
 <p style="text-align: center;" class="footer-license">
     <a href="https://www.neurology.org/doi/10.1212/WNL.0000000000209861?url_ver=Z39.88-2003&rfr_id=ori:rid:crossref.org&rfr_dat=cr_pub%20%200pubmed" target="_blank" rel="noopener">
@@ -18,4 +18,9 @@ We are planning our first iAIMS Journal Club, in which lead author [Prof. Jaime 
     </a>
 </p>
 
-More details will follow soon.
+### Introducing the speaker
+Dr. Speiser is a biostatistician focused on prediction modeling with applications in medicine. Her work involves developing novel machine learning methodology for prediction modeling, providing guidance for best practices for developing prediction models, and collaborating with medical researchers to develop models that inform clinical decision making in the learning health system.
+
+Dr. Speiser received her B.S. in mathematics at Elon University and M.S. in statistics at the Ohio State University. She completed her Ph.D. in biostatistics at the Medical University of South Carolina, where she was awarded the Distinguished Graduate Student Award at the top of her class. Dr. Speiser received the Lester R Curtin Award from the American Statistical Association. She serves on the executive committees of the American Statistical Association’s Statistical Learning and Data Science Section and Statistics and Data Science in Aging Interest Group.
+
+Dr. Speiser is currently funded by an NIH K25 award and is the co-leader for the Biostatistics core of Wake Forest’s Pepper Center. Her paper comparing random forest variable selection methods is a top cited paper in the journal Expert Systems with Applications with over 1700 citations.
