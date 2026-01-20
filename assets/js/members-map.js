@@ -65,7 +65,7 @@
     const count = counts[countryName] || 0;
 
     return {
-      fillColor: count > 0 ? "#1fa4a9" : "#f0f0f0",
+      fillColor: count > 0 ? "#1fa4a9" : "#1fa4a9",
       weight: 0.8,
       color: "#ffffff",
       fillOpacity: count > 0 ? 0.85 : 0
@@ -83,6 +83,8 @@
         { sticky: true }
       );
     }
+    layer.on("mouseover", () => layer.setStyle({ fillColor: "#cc181e"}));
+    layer.on("mouseout", () => layer.setStyle({ fillColor: "#1fa4a9" }));
   }
 
   // Add GeoJSON layer

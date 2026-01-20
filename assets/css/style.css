@@ -275,6 +275,10 @@ body {
   color: #000000;
 }
 
+.fa-heart {
+  color: #cc181e;
+}
+
 /* Blog index */
 .blog-index h1 {
   margin-bottom: 0.5rem;
