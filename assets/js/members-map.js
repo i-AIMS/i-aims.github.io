@@ -65,10 +65,10 @@
     const count = counts[countryName] || 0;
 
     return {
-      fillColor: count > 0 ? "#1fa4a9" : "#e6ecef",
+      fillColor: count > 0 ? "#1fa4a9" : "#f0f0f0",
       weight: 0.8,
       color: "#ffffff",
-      fillOpacity: count > 0 ? 0.85 : 0.6
+      fillOpacity: count > 0 ? 0.85 : 0
     };
   }
 
