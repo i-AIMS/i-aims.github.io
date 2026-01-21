@@ -3,10 +3,10 @@ name: Niels Bergsland
 slug: niels-bergsland
 role: Assistant professor of neurology
 affiliation: State University of New York at Buffalo (University at Buffalo)
-country: USA
-photo: /assets/members/GuyNagels.jpg
+country: United States of America
+photo: /assets/members/NielsBergsland.jpg
 bio: >
-  Serious MS Neurologist
+  Assistant professor of neurology
 links:
   mail: mailto:npb5@buffalo.edu
   linkedin: https://www.linkedin.com/in/niels-bergsland-46582b3
