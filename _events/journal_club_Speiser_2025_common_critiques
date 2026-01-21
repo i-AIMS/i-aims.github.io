@@ -7,6 +7,7 @@ location: "Online"
 type: "Journal Club"
 status: "upcoming"
 link: "https://teams.microsoft.com/l/meetup-join/19%3ameeting_YTRjMjY0OTktMWY1NC00Njc3LTg1N2YtODdlZDZjNTY2MDg2%40thread.v2/0?context=%7b%22Tid%22%3a%22695b7ca8-2da8-4545-a2da-42d03784e585%22%2c%22Oid%22%3a%22d4a2c2c8-65ca-485b-aff3-3499f9442af0%22%7d"       # Complete and uncomment if we have a join link
+ics: "/assets/ics/2026-01-30_inaugural_JC_prof_Speiser.ics"
 #recording: "https://link/to/recording"
 ---
 
