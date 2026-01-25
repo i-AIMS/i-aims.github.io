@@ -41,7 +41,15 @@
       <a href="{{ event.linkedin }}"
            target="_blank" rel="noopener"
            aria-label="iAIMS LinkedIn">
-          <i class="fa-brands fa-linkedin"></i> &nbsp; LinkedIn event
+          <i class="fa-brands fa-linkedin"></i> &nbsp; LinkedIn event<br>
+      </a>
+      {% endif %}
+
+      {% if event.houserules %}
+      <a href="{{ event.houserules }}"
+           target="_blank" rel="noopener"
+           aria-label="iAIMS Journal Club house rules">
+           🏠 &nbsp; House rules
       </a>
       {% endif %}
   </p>
