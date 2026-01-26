@@ -12,21 +12,21 @@
 
   <p class="event-details">
       {% if event.date %}
-        📅 {{ event.date | date: "%d/%m/%Y" }}<br>
+        📅 &nbsp;{{ event.date | date: "%d/%m/%Y" }}<br>
       {% else %}
-        📅 TBA<br>
+        📅 &nbsp;TBA<br>
       {% endif %}
 
       {% if event.time and event.timezone %}
-        🕒 {{ event.time }} ({{ event.timezone }}) <br>
+        🕒 &nbsp;{{ event.time }} ({{ event.timezone }}) <br>
       {% else %}
-        🕒 TBA <br>
+        🕒 &nbsp;TBA <br>
       {% endif %}
 
       {% if event.location %}
-        📍 {{ event.location }}<br>
+        📍 &nbsp;{{ event.location }}<br>
       {% else %}
-        📍 TBA <br>
+        📍 &nbsp;TBA <br>
       {% endif %}
 
       {% if event.recording %}
@@ -49,7 +49,15 @@
       <a href="{{ event.houserules }}"
            target="_blank" rel="noopener"
            aria-label="iAIMS Journal Club house rules">
-           🏠 &nbsp; House rules
+           🏠&nbsp; House rules<br>
+      </a>
+      {% endif %}
+
+      {% if event.googleforms %}
+      <a href="{{ event.googleforms }}"
+           target="_blank" rel="noopener"
+           aria-label="JC Google forms">
+           📝&nbsp; Post-event survey<br>
       </a>
       {% endif %}
   </p>
