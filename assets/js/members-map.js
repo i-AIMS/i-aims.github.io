@@ -1,3 +1,8 @@
+const primary = "#006666";
+const secondary = "#ff6b6b";
+const light = "#f5f5f5";
+const dark = "#333333";
+
 (async function initMembersMap() {
   const mapEl = document.getElementById("members-map");
   if (!mapEl) return;
@@ -65,9 +70,9 @@
     const count = counts[countryName] || 0;
 
     return {
-      fillColor: count > 0 ? "#1fa4a9" : "#1fa4a9",
+      fillColor: count > 0 ? primary : primary,
       weight: 0.8,
-      color: "#ffffff",
+      color: light,
       fillOpacity: count > 0 ? 0.85 : 0
     };
   }
@@ -83,8 +88,8 @@
         { sticky: true }
       );
     }
-    layer.on("mouseover", () => layer.setStyle({ fillColor: "#cc181e"}));
-    layer.on("mouseout", () => layer.setStyle({ fillColor: "#1fa4a9" }));
+    layer.on("mouseover", () => layer.setStyle({ fillColor: secondary}));
+    layer.on("mouseout", () => layer.setStyle({ fillColor: primary }));
   }
 
   // Add GeoJSON layer
