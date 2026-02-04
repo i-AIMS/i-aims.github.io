@@ -19,8 +19,8 @@ html, html[data-theme="light"] {
 }
 
 html, html[data-theme="dark"] {
-  --primary-color: var(--secondary);
-  --secondary-color: var(--primary);
+  --primary-color: var(--primary);
+  --secondary-color: var(--secondary);
   --main-background-color: var(--dark);
   --main-text-color: var(--light);
 }
@@ -294,7 +294,7 @@ body {
 .blog-content a,
 .blog-author a,
 .event-card a {
-  color: var(--secondary);
+  color: var(--primary);
   text-decoration: none;
 }
 
@@ -503,7 +503,7 @@ body {
 
 .event-type {
   font-weight: 600;
-  color: var(--secondary);
+  color: var(--primary);
 }
 
 .event-title {
