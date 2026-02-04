@@ -25,9 +25,30 @@ permalink: /events/
 
   {% if past.size > 0 %}
   <h2>Past events</h2>
-  <div class="events-list">
+
+  <div class="events-list past-events">
     {% for event in past %}
-      {% include event-card.html event=event %}
+    <details class="past-event">
+      <summary class="past-event-summary">
+        <span class="past-event-date">
+          {{ event.date | date: "%Y-%m-%d" }}
+        </span>
+
+        <span class="past-event-title">
+          {{ event.title }}
+        </span>
+
+        {% if event.type %}
+        <span class="past-event-type">
+          {{ event.type }}
+        </span>
+        {% endif %}
+      </summary>
+
+      <div class="event-card">
+        {% include event-card.html event=event %}
+      </div>
+    </details>
     {% endfor %}
   </div>
   {% endif %}
