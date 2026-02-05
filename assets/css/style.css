@@ -67,7 +67,7 @@ body {
 
 /* Styling navigation bar on top */
 .navbar {
-  background: var(--light);
+  background: var(--main-background-color);
   width: 100%;
   box-shadow: 0 0 20px 1px var(--primary-color);
 }
@@ -269,7 +269,7 @@ body {
 
 /* Footer design */
 .site-footer {
-  background: var(--light);
+  background: var(--card-background);
   width: 100%;
   box-shadow: 0 0 40px 1px var(--secondary);
   position: relative;
@@ -293,7 +293,7 @@ body {
 
 .footer-tagline {
   font-size: 0.9rem;
-  color: var(--dark);
+  color: var(--main-text-color);
 }
 
 .footer-links ul {
@@ -307,7 +307,7 @@ body {
 }
 
 .footer-links a {
-  color: var(--primary);
+  color: var(--primary-color);
   text-decoration: none;
 }
 
@@ -317,7 +317,7 @@ body {
 
 .footer-right {
   font-size: 0.85rem;
-  color: var(--dark);
+  color: var(--main-text-color);
 }
 
 .footer-license a,
@@ -629,6 +629,11 @@ body {
 
 .past-event[open] .past-event-summary::after {
   transform: rotate(90deg);
+}
+
+.event-details a:hover,
+.event-description a:hover {
+  text-decoration: underline;
 }
 
 
