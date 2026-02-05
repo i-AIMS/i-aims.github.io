@@ -609,21 +609,6 @@ body {
   transform: rotate(90deg);
 }
 
-/* Media */
-.media-placeholder {
-  margin-top: 3rem;
-  padding: 2.5rem;
-  text-align: center;
-  border-radius: 14px;
-  background: var(--light);
-}
-
-.media-placeholder i {
-  font-size: 3rem;
-  color: #FF0000;
-  margin-bottom: 1rem;
-}
-
 
 /* Adaptive web design */
 /* Mobile */
@@ -672,10 +657,6 @@ body {
     flex-direction: column;
     align-items: flex-start;
   }
-
-  .video-grid iframe {
-    max-width: 90%;
-  }
 }
 
 /* Tablet */
@@ -697,10 +678,6 @@ body {
   .blog-card {
     flex-direction: column;
   }
-
-  /*.video-grid iframe {*/
-  /*  max-width: 90%;*/
-  /*}*/
 
   .members-grid {
     grid-template-columns: repeat(2, 1fr);
