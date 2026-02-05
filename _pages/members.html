@@ -79,6 +79,13 @@ permalink: /members/
             </a>
           {% endif %}
 
+          {% if member.links.github %}
+          <a href="{{ member.links.github }}" target="_blank"
+             aria-label="GitHub" class="member-icon">
+            <i class="fa-solid fa-github"></i>
+          </a>
+          {% endif %}
+
           {% if member.links.website %}
             <a href="{{ member.links.website }}" target="_blank"
                aria-label="Website" class="member-icon">
