@@ -162,6 +162,22 @@ body {
   color: var(--light);
 }
 
+.nav-links .theme-toggle {
+  background: var(--main-text-color);
+  color: var(--main-background-color);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  box-shadow: var(--button-shadow);
+}
+
+.nav-links .theme-toggle:hover {
+  border-radius: 12px;
+}
+
+.nav-links a.theme-toggle:hover {
+  color: var(--main-background-color);
+}
+
 .site-nav {
   display: flex;
   flex-wrap: wrap;           /* 👈 allows 2 rows */
