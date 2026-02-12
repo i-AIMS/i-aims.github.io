@@ -1,7 +1,7 @@
 ---
 name: Alessia Bianchi
 slug: alessia-bianchi
-role: Post-Doc Clinical Research Fellow
+role: Postdoctoral researcher
 affiliation: University of Siena, Italy / University College London, UK
 country: Italy
 photo: /assets/members/AlessiaBianchi.jpg
