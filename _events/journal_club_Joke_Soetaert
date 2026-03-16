@@ -6,7 +6,7 @@ timezone: "CET"                         # Uncomment and complete "three-letter t
 location: "Online"
 type: "Journal Club"
 host: joke-soetaert
-status: "upcoming"
+status: "past"
 link: "https://teams.microsoft.com/l/meetup-join/19%3ameeting_YTZkYzkxODQtMTZhMC00ZDk4LWE2NmYtMjc2YjQxNGQzNDJm%40thread.v2/0?context=%7b%22Tid%22%3a%22695b7ca8-2da8-4545-a2da-42d03784e585%22%2c%22Oid%22%3a%22d4a2c2c8-65ca-485b-aff3-3499f9442af0%22%7d"       # Complete and uncomment if we have a join link
 ics: "/assets/ics/2026-03-13_joke_soetaert.ics"
 linkedin: "https://www.linkedin.com/events/7431398366355501056?viewAsMember=true"
