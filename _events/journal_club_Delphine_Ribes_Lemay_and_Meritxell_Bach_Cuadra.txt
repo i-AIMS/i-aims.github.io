@@ -21,12 +21,14 @@ This journal club will examine key factors influencing the integration of AI int
 📝 Relevant papers
 <p style="text-align: center;" class="footer-license">
     <a href="https://www.sciencedirect.com/science/article/pii/S0010482524014215" target="_blank" rel="noopener">
-       Molchanova N., Raina V., Malinin A., La Rosa F., Depeursinge A., Gales M., Granziera C., Müller H., Graziani M., Bach Cuadra M. 
+       Molchanova N., Raina V., Malinin A., La Rosa F., Depeursinge A., Gales M., Granziera C., Müller H., Graziani M., Bach Cuadra M.
     </a>
 </p>
 <p style="text-align: center;" class="footer-license">
-    <a href="https://zenodo.org/records/18695473" target="_blank" rel="noopener">
-       Molchanova N., Raina V., Malinin A., La Rosa F., Depeursinge A., Gales M., Granziera C., Müller H., Graziani M., Bach Cuadra M. 
+    <a href="https://zenodo.org/records/18695473" target="_blank" rel="noopener">      
+    Motta M., Zhan W., Molchanova N., Spagnolo F., Baez Lugo S., Clara E., M. Gordaliza P., Cagol A., Dunet V.,
+    Pistocchi S., Mutke M. A., Borràs Ferrís L., Gobbo B., Reyes M., Ruberte E., Erard F., Henchoz N., Müller H.
+    Granziera C., Depeursinge A., Bach Cuadra M., Ribes Lemay D.
     </a>
 </p>
 
