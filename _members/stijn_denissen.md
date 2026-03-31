@@ -6,7 +6,7 @@ affiliation: Vrije Universiteit Brussel, Belgium
 country: Belgium
 photo: /assets/members/Stijn.jpg
 bio: >
-  Physiotherapist by training, undercover agent among the AI developers. Triathlete, guitarist, nearly-dad.
+  Physiotherapist by training, undercover agent among the AI developers. Triathlete, guitarist, dad.
 links:
   mail: mailto:stijn.denissen@vub.be
   linkedin: https://www.linkedin.com/in/stijndenissen/
