@@ -6,7 +6,7 @@ timezone: "CET"                         # Uncomment and complete "three-letter t
 location: "Online"
 type: "Journal Club"
 host: 
-status: "upcoming"
+status: "past"
 link: "https://teams.microsoft.com/meet/3291584461660?p=RJIIkWYtbqpxJgAAOp"       # Complete and uncomment if we have a join link
 ics: "/assets/ics/2026-03-30_Delphine_Ribes_Lemay_and_Meritxell_Bach_Cuadra.ics"
 linkedin: "https://www.linkedin.com/events/7439270314628268032?viewAsMember=true"
