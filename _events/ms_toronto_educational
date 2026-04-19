@@ -1,0 +1,19 @@
+---
+title: "Educational session @MSToronto 2026"
+date: 2026/10/21                        # Uncomment and complete YYYY/MM/DD if we have a date
+time: "08:30"                           # Uncomment and complete "Hh:Mm" if we have a time
+timezone: "EDT"                         # Uncomment and complete "three-letter timezone" if we have a time
+location: "Metro Toronto Convention Center"
+type: "Educational Session"
+status: "upcoming"
+#link: "https://mstoronto2026.virtual-meeting.org/programme/session/69775"       # Complete and uncomment if we have a join link
+#ics: "/assets/ics/2026-01-30_inaugural_JC_prof_Speiser.ics"
+#linkedin: "https://www.linkedin.com/events/inauguraljournalclub-prof-jaime7420420280071811072/"
+#recording: "https://youtu.be/fykIGoehpdc?si=EyBoZtw-480CViuY"
+#houserules: "/events/jc-house-rules/"
+#googleforms: "https://docs.google.com/forms/d/e/1FAIpQLSffINjI_9cierder2WES7n0aWaKbEtLYM-n2jFx5vL7CkidRw/viewform?usp=dialog"
+---
+
+iAIMS will host an educational session entitled "Understanding AI in MS: Practical Tools for Clinicians and Researchers" at the 10th joint ECTRIMS/ACTRIMS edition (MSToronto) 2026!
+As per the convention of the conference, educational sessions are not included in the registration.
+For more information, please check [the MSToronto 2026 website](https://mstoronto2026.virtual-meeting.org/programme/session/69775).
