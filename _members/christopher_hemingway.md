@@ -11,4 +11,4 @@ links:
   mail: mailto:christopher.hemingway@med.uni-muenchen.de
   linkedin: https://www.linkedin.com/in/christopher-hemingway/
   orcid: https://orcid.org/0009-0003-7519-4460
----[christopher_hemingway.md](christopher_hemingway.md)
+---
