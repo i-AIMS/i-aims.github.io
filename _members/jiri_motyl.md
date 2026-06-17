@@ -4,7 +4,7 @@ slug: jiri-motyl
 role: Neuropsychologist and Postdoctoral Researcher
 affiliation: General University Hospital in Prague, Charles University
 country: Czechia
-photo: /assets/members/JiryMotyl.jpeg
+photo: /assets/members/JiriMotyl.jpeg
 bio: >
   Neuropsychologist, Neuroscientist and Sustainable Transportation Geek.
 links:
