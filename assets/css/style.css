@@ -675,6 +675,27 @@ body {
   text-decoration: underline;
 }
 
+/* Timers */
+.timer-banner {
+    border-left: 4px solid #0056b3; /* Classy blue for academic look */
+    padding: 10px 15px;
+    margin: 15px 0;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    display: inline-block;
+}
+.countdown-clock {
+    font-family: monospace;
+    font-weight: bold;
+    color: #0056b3;
+    margin-left: 5px;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+.countdown-clock.expired {
+    color: #dc3545;
+}
+
 
 /* Adaptive web design */
 /* Mobile */
