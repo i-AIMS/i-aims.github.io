@@ -696,6 +696,98 @@ body {
     color: #dc3545;
 }
 
+/* Slideshow Container */
+.slideshow-container {
+    justify-content: center;
+    position: relative;
+    max-width: 800px;
+    width: 90%;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Individual Slide */
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+/* Active Slide */
+.slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* Slide Images */
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Keeps aspect ratio clean */
+}
+
+/* Elegant Navigation Buttons */
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px); /* Modern glassmorphism effect */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    z-index: 10;
+    user-select: none;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    scale: 1.05;
+}
+
+.prev-btn { left: 20px; }
+.next-btn { right: 20px; }
+
+/* Elegant Progress Dots */
+.dots-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: #ffffff;
+    width: 24px; /* Stretches the active dot slightly */
+    border-radius: 4px;
+}
 
 /* Adaptive web design */
 /* Mobile */

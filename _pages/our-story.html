@@ -26,9 +26,54 @@ permalink: /our-story/
   <p>
     They realized that bridging this gap required more than new algorithms. It required a space where clinicians and researchers could learn from each other, explore possibilities, and collaborate in a supportive environment. iAIMS was created to be that space.
   </p>
+    <div class="slideshow-container">
+        <div class="slide active"><img src="/assets/images/iAIMS_kickoff_event_1.jpg"></div>
+        <div class="slide"><img src="/assets/images/iAIMS_kickoff_event_2.jpg"></div>
+        <div class="slide"><img src="/assets/images/iAIMS_kickoff_event_3.jpg"></div>
+        <div class="slide"><img src="/assets/images/iAIMS_kickoff_event_4.JPG"></div>
+        <div class="slide"><img src="/assets/images/iAIMS_kickoff_event_5.jpg"></div>
+        <div class="slide"><img src="/assets/images/iAIMS_kickoff_event_6.jpg"></div>
+        <div class="slide"><img src="/assets/images/iAIMS_kickoff_event_7.jpg"></div>
+        <div class="slide"><img src="/assets/images/iAIMS_kickoff_event_8.jpg"></div>
+        <div class="slide"><img src="/assets/images/iAIMS_kickoff_event_9.jpg"></div>
+        <div class="slide"><img src="/assets/images/iAIMS_kickoff_event_10.jpg"></div>
+        <div class="slide"><img src="/assets/images/iAIMS_kickoff_event_11.jpg"></div>
+        <div class="slide"><img src="/assets/images/iAIMS_kickoff_event_12.jpg"></div>
+        <div class="slide"><img src="/assets/images/iAIMS_kickoff_event_13.jpg"></div>
+        <div class="slide"><img src="/assets/images/iAIMS_kickoff_event_14.JPG"></div>
+        <div class="slide"><img src="/assets/images/iAIMS_kickoff_event_15.jpg"></div>
+        <div class="slide"><img src="/assets/images/iAIMS_kickoff_event_16.jpg"></div>
+        <div class="slide"><img src="/assets/images/iAIMS_kickoff_event_17.jpg"></div>
+        <div class="slide"><img src="/assets/images/iAIMS_kickoff_event_18.jpg"></div>
+        <div class="slide"><img src="/assets/images/iAIMS_kickoff_event_19.jpg"></div>
 
-  <img src="/assets/images/iAIMS_kickoff_event_1.jpg" alt="iAIMS kickoff event photo" style="max-width:100%; height:auto; margin-bottom:2rem;">
+        <button class="nav-btn prev-btn" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="nav-btn next-btn" onclick="changeSlide(1)">&#10095;</button>
 
+        <div class="dots-container">
+            <div class="dot active" onclick="currentSlide(0)"></div>
+            <div class="dot" onclick="currentSlide(1)"></div>
+            <div class="dot" onclick="currentSlide(2)"></div>
+            <div class="dot" onclick="currentSlide(3)"></div>
+            <div class="dot" onclick="currentSlide(4)"></div>
+            <div class="dot" onclick="currentSlide(5)"></div>
+            <div class="dot" onclick="currentSlide(6)"></div>
+            <div class="dot" onclick="currentSlide(7)"></div>
+            <div class="dot" onclick="currentSlide(8)"></div>
+            <div class="dot" onclick="currentSlide(9)"></div>
+            <div class="dot" onclick="currentSlide(10)"></div>
+            <div class="dot" onclick="currentSlide(11)"></div>
+            <div class="dot" onclick="currentSlide(12)"></div>
+            <div class="dot" onclick="currentSlide(13)"></div>
+            <div class="dot" onclick="currentSlide(14)"></div>
+            <div class="dot" onclick="currentSlide(15)"></div>
+            <div class="dot" onclick="currentSlide(16)"></div>
+            <div class="dot" onclick="currentSlide(17)"></div>
+            <div class="dot" onclick="currentSlide(18)"></div>
+
+        </div>
+    </div>
+    <br>
   <h2>A Community With a Shared Purpose</h2>
 
   <p>
@@ -88,3 +133,40 @@ permalink: /our-story/
     The story of iAIMS is still being written. We invite you to join us as we learn, build, and shape the future of AI and MS together.
   </p>
 </section>
+
+<script>
+    let currentIdx = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+
+    function updateSlideshow() {
+        slides.forEach((slide, index) => {
+            // Toggle active class for slides
+            if (index === currentIdx) {
+                slide.classList.add('active');
+                dots[index].classList.add('active');
+            } else {
+                slide.classList.remove('active');
+                dots[index].classList.remove('active');
+            }
+        });
+    }
+
+    function changeSlide(direction) {
+        currentIdx += direction;
+
+        // Loop controls
+        if (currentIdx >= slides.length) {
+            currentIdx = 0;
+        } else if (currentIdx < 0) {
+            currentIdx = slides.length - 1;
+        }
+
+        updateSlideshow();
+    }
+
+    function currentSlide(index) {
+        currentIdx = index;
+        updateSlideshow();
+    }
+</script>
