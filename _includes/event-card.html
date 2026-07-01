@@ -85,18 +85,21 @@
     {{ event.content | markdownify }}
   </div>
 
-  {% if event.link %}
     <p class="hero-buttons">
     <ul class="nav-links">
-      <a class="cta"
-         href="{{ event.link }}">
-        Join Meeting
-      </a>
-      <a class="cta"
-         href="{{ event.ics }}">
-        Add to your calendar
-      </a>
+    {% if event.link %}
+
+              <a class="cta"
+                 href="{{ event.link }}">
+                Join Meeting
+              </a>
+    {% endif %}
+    {% if event.ics %}
+          <a class="cta"
+             href="{{ event.ics }}">
+            Add to your calendar
+          </a>
+  {% endif %}
     </ul>
     </p>
-  {% endif %}
 </article>
