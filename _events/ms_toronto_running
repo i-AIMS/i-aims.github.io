@@ -1,0 +1,27 @@
+---
+title: "Running @MSToronto 2026"
+date: 2026/10/22                        # Uncomment and complete YYYY/MM/DD if we have a date
+time: "07:00"                           # Uncomment and complete "Hh:Mm" if we have a time
+timezone: "EDT"                         # Uncomment and complete "three-letter timezone" if we have a time
+location: "Ivy. Coffee shop, Toronto"
+type: "Sports"
+status: "upcoming"
+ics: "/assets/ics/2026-10-22_aims_running_event.ics"
+---
+
+Moderate-to-vigorous exercise slows down our brain aging clock [1] and solves any bug in your code that you've been staring on for far too long.
+Dear iAIMS friends, join us on Thursday the 22nd in Toronto in the early morning for a refreshing run along the lake!
+
+iAIMS member Prof. Niels Bergsland mounts the stage in the NAIMS educational session at 8:30, which is why we will run early.
+We will meet at "Ivy. Coffee Shop", close to the convention centre, and run on the "Martin Goodman Trail", a long cycling path along the lake.
+Depending on the pace differences, we might make different pace groups on the spot.
+We will run in the direction of the blue arrow, run for 15 minutes and then run back, meeting at Ivy. Coffee Shop again after half an hour.
+
+<img src="../assets/images/MSToronto2026_running_map.png" alt="Alt Text" width="100%">
+
+Please let us know via the [Google Forms](https://docs.google.com/forms/d/e/1FAIpQLSdinKTo5vI59FekpmKbl4M0ed22JGnX_m20g1zMTCJiYV3M8A/viewform?usp=publish-editor) whether you intend to come, so we can gage a bit how many people will be there.
+
+See you there!
+
+## References:
+[1] Wan, Lu, et al. "Fitness and exercise effects on brain age: A randomized clinical trial." Journal of Sport and Health Science (2025): 101079.
