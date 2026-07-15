@@ -1,0 +1,204 @@
+---
+layout: default
+title: Tools
+nav: tools
+permalink: /tools/
+---
+
+<div class="section">
+    <h1 style="text-align: center">📚 ReHPAI tool</h1>
+        <p style="text-align: center; margin-bottom: 40px;">Reviewing Healthcare Papers with AI</p>
+
+        <div class="review-guide">
+
+            <!------------------ STEP 1 ------------------>
+            <div class="step" id="step1">
+                <h2>Step 1: The editorial invite</h2>
+                <p>
+                    Ask yourself the following questions:
+                    <ol>
+                        <li>Do I have the expertise to review this manuscript?</li>
+                        <li>Do I have any conflicts of interest?</li>
+                        <li>Do I have time to complete the review before the deadline? (ask for an extension if this is not the case)</li>
+                    </ol>
+                    Try to respond to the invite as soon as possible to not keep the editor waiting. Also add the reason why you rejected if applicable.
+                </p>
+
+                <!-- Action Point Link -->
+                <a href="#" class="action-point" onclick="openModal('step_1', event)">🔍 AI-specific Considerations</a>
+            </div>
+
+            <!------------------ STEP 2 ------------------>
+            <div class="step" id="step2">
+                <h2>Step 2: Paper first read</h2>
+                <p>
+                    Read the paper for the first time. Note anything that comes to mind while reading the manuscript, which you can later categorise further:
+                    <ol>
+                        <li>Which elements do you lack background on? Search for this information in step 3.</li>
+                        <li>Thoughts/concerns to include in your review. You can later decide whether they are a reason to reject the manuscript, major, minor, suggestions or not worth mentioning after all. They can also be internal notes for the editor.</li>
+                    </ol>
+
+                <!-- Action Point Link -->
+                <a href="#" class="action-point" onclick="openModal('step_2', event)">🔍 AI-specific Considerations</a>
+
+            </div>
+
+            <!------------------ STEP 3 ------------------>
+            <div class="step" id="step3">
+                <h2>Step 3: Literature search (optional)</h2>
+                <p>
+                    Additional literature review is warranted in two cases:
+                    <ol>
+                        <li>It is unclear to you whether the manuscript represent original research not published before.</li>
+                        <li>You lack background on certain paper elements as identified in step 2.</li>
+                    </ol>
+                </p>
+
+                 <!-- Action Point Link -->
+                <a href="#" class="action-point" onclick="openModal('step_3', event)">🔍 AI-specific Considerations</a>
+
+            </div>
+
+             <!------------------ STEP 4 ------------------>
+            <div class="step" id="step4">
+                <h2>Step 4: Reread the paper</h2>
+                <p>
+                    Rereading the manuscript offers a new perspective.
+                    Therefore, Sedaghat et al. 2024 suggest to wait at least a day with rereading to have a fresh pair of eyes.
+                    The same group of authors actually suggest you to reread twice, once from a scientific point of view, once for the writing.
+                    The frequency is up to you, but rereading allows you to filter your initial notes from step 2 and add new considerations.
+                </p>
+            </div>
+
+            <!------------------ STEP 5 ------------------>
+            <div class="step" id="step5">
+                <h2>Step 5: Classify your notes</h2>
+                <p>
+                    Start from the notes you took in step 2 and refined in step 4. Categorise the notes:
+                    <ul>
+                        <li>Remark that justifies rejection</li>
+                        <li>Major remark</li>
+                        <li>Minor remark</li>
+                        <li>Suggestion</li>
+                        <li>Not worth mentioning after all</li>
+                    </ul>
+                </p>
+
+                 <!-- Action Point Link -->
+                <a href="#" class="action-point" onclick="openModal('step_5', event)">🔍 AI-specific Considerations</a>
+
+            </div>
+
+            <!------------------ STEP 6 ------------------>
+            <div class="step" id="step6">
+                <h2>Step 6: Write your review report</h2>
+                <p>
+                    A good visual summary for writing your review report can be found in figure 2 of Sedaghat et al. 2024.
+                    Concretely, it consists of a summary paragraph, followed by a section on major remarks and one on minor remarks.
+                    If certain notes from step 5 arised that are for the eyes of the editor only, include this in your letter to the editor, which is not shared with the reviewers.
+                </p>
+
+            </div>
+
+            <!------------------ STEP 7 ------------------>
+            <div class="step" id="step7">
+                <h2>Step 7: Submit</h2>
+                <p>
+                    Lorem ipsum sit amet
+                </p>
+
+            </div>
+        </div>
+
+
+        <!------------------- MODAL (POPUP) STRUCTURES ---------------------->
+
+        <!-- Modal for Bias/Fairness Concerns -->
+        <div id="step_1" class="modal">
+          <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('step_1')">&times;</span>
+            <h3>🔍 AI-specific Considerations</h3>
+            <p>
+                <b>Expertise.</b> Receiving a request to review a paper involving AI while you have little expertise in AI doesn't mean an automatic reject.
+                Ask yourself whether this paper has a heavy emphasis on AI development:
+                <ul>
+                    <li><b>Yes:</b> Contact the editor to ask whether another reviewer covers this aspect:
+                        <ul>
+                            <li><b>Yes:</b> You can focus on domain-specific considerations.</li>
+                            <li><b>No:</b> It is probably recommended to reject to review.</li>
+                        </ul>
+                    <li><b>No:</b> It is likely that the editor contacted you for domain-specific knowledge. You can safely assume you have the required expertise.</li>
+                </ul>
+              </p>
+          </div>
+        </div>
+
+        <div id="step_2" class="modal">
+          <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('step_2')">&times;</span>
+            <h3>🔍 AI-specific Considerations</h3>
+                <p>
+                    Consider using the paper of Dijkstra et al. 2025 on <a href="https://bmjmedicine.bmj.com/content/bmjmed/4/1/e001394.full.pdf">"How to read a paper involving artificial intelligence (AI)"</a> as a guide to read the paper.
+                </p>
+          </div>
+        </div>
+
+        <div id="step_3" class="modal">
+          <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('step_3')">&times;</span>
+            <h3>🔍 AI-specific Considerations</h3>
+                <p>
+                    Do not lose yourself in searching up AI-specific details of the manuscript you don't understand.
+                    In a later step, we will guide you through all the AI-specific elements to check for in the manuscript.
+                    Remember, the AI development reviewing is being handled by another reviewer. You can focus on domain-specific implications.
+                </p>
+          </div>
+        </div>
+
+        <div id="step_5" class="modal">
+          <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('step_5')">&times;</span>
+            <h3>🔍 AI-specific Considerations</h3>
+                <p>
+                    Lorem ipsum sit amet... >>> This is what the EQUATOR guidelines will reveal <<<
+                </p>
+          </div>
+        </div>
+</div>
+
+<!------------------- JAVASCRIPT FOR MODAL INTERACTIVITY ---------------------->
+<script>
+    // This object holds all user notes across the entire session
+    let reviewDraft = {
+        step1_status: '', // Stores 'yes', 'partial', or 'no'
+        notes: {
+            2: [], // Notes for Step 2
+            3: [], // Notes for Step 3
+            5: []  // Notes for Step 5 (Final set)
+        }
+    };
+
+    // Function to open a specific modal by ID
+    function openModal(modalId, event) {
+        event.preventDefault(); // Prevent the default link jump behavior
+        document.getElementById(modalId).style.display = "block";
+        // Optional: Add body scroll lock when modal is open
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Function to close any active modal
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+         // Restore normal scrolling
+        document.body.style.overflow = 'auto';
+    }
+
+    // Close the modal if the user clicks anywhere outside of it
+    window.onclick = function (event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = "none";
+             document.body.style.overflow = 'auto';
+        }
+    }
+
+</script>
