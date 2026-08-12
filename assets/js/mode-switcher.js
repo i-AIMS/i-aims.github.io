@@ -1,15 +1,16 @@
-let systemInitiatedDark = window.matchMedia("(prefers-color-scheme: dark)");
+let systemInitiatedDark = window.matchMedia("(prefers-color-scheme: light)");
 let theme = sessionStorage.getItem('theme');
 
-if (systemInitiatedDark.matches) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    sessionStorage.setItem('theme', 'dark');
-    document.getElementById("theme-toggle").innerHTML = "Light Mode";
-} else {
-    document.documentElement.setAttribute('data-theme', 'light');
-    sessionStorage.setItem('theme', 'light');
-    document.getElementById("theme-toggle").innerHTML = "Dark Mode";
-}
+//if (systemInitiatedDark.matches) {
+//    document.documentElement.setAttribute('data-theme', 'dark');
+//    sessionStorage.setItem('theme', 'dark');
+//    document.getElementById("theme-toggle").innerHTML = "Light Mode";
+//} else {
+//    document.documentElement.setAttribute('data-theme', 'light');
+//    sessionStorage.setItem('theme', 'light');
+//    document.getElementById("theme-toggle").innerHTML = "Dark Mode";
+//}
+
 
 function prefersColorTest(e) {
     // `e` may be a MediaQueryListEvent (from addEventListener) or a MediaQueryList (from addListener fallback)

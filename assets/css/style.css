@@ -23,6 +23,33 @@ html, html[data-theme="light"] {
   --card-background: var(--dark-transparent);
 }
 
+/*
+html, html[data-theme="dark"] {
+  --primary-color: var(--secondary);
+  --secondary-color: var(--primary);
+  --main-background-color: var(--dark);
+  --main-text-color: var(--light);
+  --card-background: var(--bright-transparent);
+}
+
+@media (prefers-color-scheme: dark) {
+  html, html[data-theme="dark"] {
+    --primary-color: var(--secondary);
+    --secondary-color: var(--primary);
+    --main-background-color: var(--dark);
+    --main-text-color: var(--light);
+    --card-background: var(--bright-transparent);
+  }
+
+  html, html[data-theme="light"] {
+    --primary-color: var(--primary);
+    --secondary-color: var(--secondary);
+    --main-background-color: var(--light);
+    --main-text-color: var(--dark);
+    --card-background: var(--dark-transparent);
+  }
+}
+*/
 
 html, body {
   margin: 0;
