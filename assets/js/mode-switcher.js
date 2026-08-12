@@ -1,5 +1,7 @@
 let systemInitiatedDark = window.matchMedia("(prefers-color-scheme: light)");
 let theme = sessionStorage.getItem('theme');
+document.documentElement.setAttribute('data-theme', 'light');
+sessionStorage.setItem('theme', 'light');
 
 //if (systemInitiatedDark.matches) {
 //    document.documentElement.setAttribute('data-theme', 'dark');
