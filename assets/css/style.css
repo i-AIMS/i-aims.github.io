@@ -1048,6 +1048,128 @@ select {
   text-decoration: underline;
 }
 
+/* ============================================== */
+/* NOMINATION CARD STYLES & CAROUSEL LAYOUT */
+/* ============================================== */
+
+.nomination-section {
+    padding: 40px 20px;
+}
+
+.nomination-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.8em;
+}
+
+/* --- Carousel Container Setup (The Mobile Scroll) --- */
+.nomination-carousel {
+    display: grid; /* Change from flex to grid */
+    /* Key Responsive Magic: Repeats the columns, automatically setting min width (300px)
+       but allowing as many columns as fit (auto-fit). */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px; /* Space between the cards */
+    /* Removing all scrolling properties here */
+}
+
+/* --- Individual Card Design (Key Update Here) --- */
+.nomination-card {
+    background: #f9f9f9;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+    /* Keep flex for internal content alignment */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+
+/* --- Circular Image --- */
+.circular-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 3px solid var(--primary-color, #1d4f7a);
+}
+
+/* --- Role Title Styling (Special Font) --- */
+.board-role-title {
+    font-size: 1.5em;
+    color: var(--secondary-color);
+    margin: 10px auto 15px auto; /* Added auto margins to ensure centering fallback */
+    font-family: "Georgia", serif;
+    font-weight: 800;
+    /* IMPORTANT: The card is already centered, but this helps if any internal block needs it */
+    max-width: 100%;
+}
+
+/* --- Motivation Accordion Styling (Requires Major Redesign for Button Placement) --- */
+.motivation-details {
+    margin-top: 25px;
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Important: Stacks content vertically */
+}
+
+/* The accordion toggle button - Positioning and styling remains the same */
+.accordion-toggle {
+  background-color: #e6f7ff;
+  color: var(--primary-color, #1d4f7a);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 1em;
+  transition: background-color 0.3s ease, transform 0.1s;
+  width: calc(100% - 40px);
+  margin: 0px auto 0px; /* Pushes the button to appear at the bottom */
+}
+
+.accordion-toggle:hover {
+    background-color: #cceeff; /* Slight darken on hover */
+}
+
+/* The inner content area (where the details live) */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+    padding: 0;
+    background: #f9f9f9;
+}
+
+/* When open, adjust the padding structure */
+.accordion-content.active {
+    max-height: 350px;
+    padding-top: 15px;
+    padding-bottom: 20px;
+}
+
+.scrollable-motivation {
+    max-height: 150px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.motivation-details h4 {
+    font-size: 1em;
+    color: var(--primary-color, #1d4f7a);
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+/* Typography for the motivation text block (No changes needed) */
+.scrollable-motivation p {
+    text-align: justify;
+    line-height: 1.6;
+    margin: 0;
+}
+
 
 
 /* Adaptive web design */

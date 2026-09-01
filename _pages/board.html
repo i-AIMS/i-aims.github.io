@@ -7,6 +7,106 @@ permalink: /board/
 
 <section class="section">
     <h1>Let's shape our board!</h1>
+    <p>
+        The <a style="color:var(--secondary-color)" href="/assets/pdf/iAIMS_board_structure_v2.pdf" download>board structure</a> is known and the candidates have applied (cfr. infra).
+        This means we are in the last phase (2B) of the board selection process, which is the voting phase! The board will be approved if at least 20 out of 25 votes (80%) are "Yes" or "Yes, with suggestions".<br>
+        <br>
+        Cast your vote in <a style="color:var(--secondary-color)" href="https://docs.google.com/forms/d/e/1FAIpQLSdSQfJv_-c3AdSXi1DBzDYuMPmOkEaX-E12UT8dUWZlAagGrg/viewform" download>this Google Forms</a>!<br>
+    </p>
+    <div class="timer-banner">
+        <strong>Voting closes in:</strong>
+        <span id="phase2b-timer_top" class="countdown-clock">Loading timer...</span>
+    </div>
+
+    <div class="nomination-section">
+        <h2>Executive Board Candidates</h2>
+        <div class="nomination-carousel">
+            {% for nominee in site.data.board_nominations_executive.nominees %}
+                {% assign image_path = "/assets/board/nominations/imgs/" | append: nominee.image_file %}
+
+                <div class="nomination-card">
+
+                    <!-- Image Source uses the full path provided by Liquid -->
+                    <img src="{{ image_path }}" alt="{{ nominee.name }} Profile Picture" class="circular-image">
+
+                    <h3>{{ nominee.name }}</h3>
+
+                    <!-- Board Role Title (Dynamic) -->
+                    <h3 class="board-role-title">{{ nominee.bio_title }}</h3>
+
+                    <!-- Motivation (Unfoldable Section using YAML content) -->
+                    <div class="motivation-details">
+                        <button class="accordion-toggle" aria-expanded="false">View Motivation</button>
+                        <div class="accordion-content">
+                            <h4 class="motivation-header">Motivation Statement</h4>
+                            <div class="scrollable-motivation">
+                                <p>{{ nominee.motivation | strip_newlines }}</p>
+                            </div>
+                        </div>
+                    </div >
+                </div>
+
+            {% endfor %}
+        </div>
+        <h2>Working Groups Candidates</h2>
+        <div class="nomination-carousel">
+            {% for nominee in site.data.board_nominations_working_groups.nominees %}
+                {% assign image_path = "/assets/board/nominations/imgs/" | append: nominee.image_file %}
+
+                <div class="nomination-card">
+                    <!-- Image Source uses the full path provided by Liquid -->
+                    <img src="{{ image_path }}" alt="{{ nominee.name }} Profile Picture" class="circular-image">
+
+                    <h3>{{ nominee.name }}</h3>
+
+                    <!-- Board Role Title (Dynamic) -->
+                    <h3 class="board-role-title">{{ nominee.bio_title }}</h3>
+
+                    <!-- Motivation (Unfoldable Section using YAML content) -->
+                    <div class="motivation-details">
+                        <button class="accordion-toggle" aria-expanded="false">View Motivation</button>
+                        <div class="accordion-content">
+                            <h4 class="motivation-header">Motivation Statement</h4>
+                            <div class="scrollable-motivation">
+                                <p>{{ nominee.motivation | strip_newlines }}</p>
+                            </div>
+                        </div>
+                    </div >
+                </div>
+            {% endfor %}
+        </div>
+        <h2>Advisory Board Candidates</h2>
+        <div class="nomination-carousel">
+            {% for nominee in site.data.board_nominations_advisory.nominees %}
+                {% assign image_path = "/assets/board/nominations/imgs/" | append: nominee.image_file %}
+
+                <div class="nomination-card">
+                    <!-- Image Source uses the full path provided by Liquid -->
+                    <img src="{{ image_path }}" alt="{{ nominee.name }} Profile Picture" class="circular-image">
+
+                    <h3>{{ nominee.name }}</h3>
+
+                    <!-- Board Role Title (Dynamic) -->
+                    <h3 class="board-role-title">{{ nominee.bio_title }}</h3>
+
+                    <!-- Motivation (Unfoldable Section using YAML content) -->
+                    <div class="motivation-details">
+                        <button class="accordion-toggle" aria-expanded="false">View Motivation</button>
+                        <div class="accordion-content">
+                            <h4 class="motivation-header">Motivation Statement</h4>
+                            <div class="scrollable-motivation">
+                                <p>{{ nominee.motivation | strip_newlines }}</p>
+                            </div>
+                        </div>
+                    </div >
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <hr>
+
+    <h1>More info about the process</h1>
     <p class="footer-license">
         Since our brainstorm on AI in MS at the pre-evening of ECTRIMS2025, we have now transformed officially into the “international community for AI in MS” (iAIMS).
         All of this would not have been possible without your continued enthusiasm. Thank you!<br><br>
@@ -52,16 +152,14 @@ permalink: /board/
 
     <h3>Phase 2b: Voting</h3>
     <p class="footer-license">
-        Lastly, we publicly announce the candidates in the week after the end of phase 2a on <a href="/board/" target="_blank" rel="noopener"> this web page</a>, after which you can vote via Google Forms (to be announced on this web page) <b>up until 15/09/2026 at 23:59 CET</b>.
-        After review in the week after, we will announce the final board structure!
-
+        Voting has started! Please scroll through all passionate candidates on the top of the page.
+        Cast your vote for these passionate candidates via <a style="color:var(--secondary-color)" href="https://docs.google.com/forms/d/e/1FAIpQLSdSQfJv_-c3AdSXi1DBzDYuMPmOkEaX-E12UT8dUWZlAagGrg/viewform" download>this Google Forms</a>!
     </p>
-    <div class="timer-banner">
-        <strong>Voting did not start yet.</strong>
-        <!-- <strong>Voting closes in:</strong> -->
-        <!-- <span id="phase2b-timer" class="countdown-clock">Loading timer...</span> -->
-    </div>
 
+    <div class="timer-banner">
+        <strong>Voting closes in:</strong>
+        <span id="phase2b-timer_bottom" class="countdown-clock">Loading timer...</span>
+    </div>
     <hr>
 
     <h1>Closing thoughts</h1>
@@ -113,11 +211,85 @@ function createCountdown(elementId, deadlineString, closedText = "Submissions Cl
     }, 1000);
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+
+    // ==============================================
+    // 1. ACCORDION FUNCTIONALITY (Unfoldable Motivation)
+    // ==============================================
+    const toggles = document.querySelectorAll('.accordion-toggle');
+
+    toggles.forEach(toggle => {
+        toggle.addEventListener('click', function() {
+            const content = this.nextElementSibling; // Gets the adjacent .accordion-content div
+            const isExpanded = this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true';
+
+            // Toggle ARIA state for accessibility
+            this.setAttribute('aria-expanded', isExpanded);
+
+            // Collapse all other open accordions (optional, but nice UX)
+            toggles.forEach(otherToggle => {
+                if (otherToggle !== this && otherToggle.getAttribute('aria-expanded') === 'true') {
+                    otherToggle.setAttribute('aria-expanded', 'false');
+                    otherToggle.nextElementSibling.classList.remove('active');
+                }
+            });
+
+            // Toggle the current accordion's state
+            if (isExpanded === 'true') {
+                content.classList.add('active');
+            } else {
+                content.classList.remove('active');
+            }
+        });
+    });
+
+
+    // ==============================================
+    // 2. TIMER SETUP (Copied from your original script)
+    // Ensure this is still running to maintain existing features!
+    // ==============================================
+    const createCountdown = function(elementId, deadlineString, closedText = "Submissions Closed") {
+        const targetDate = new Date(deadlineString).getTime();
+        const timerElement = document.getElementById(elementId);
+
+        if (!timerElement) return;
+
+        const interval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            // Time calculations (Day/Hour/Minute/Second)
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            if (distance > 0) {
+                timerElement.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+            } else {
+                clearInterval(interval);
+                timerElement.innerHTML = closedText;
+                timerElement.classList.add("expired");
+            }
+        }, 1000);
+    };
+
+
+    // INITIALIZE ALL TIMERS:
+    createCountdown("phase1-timer", "2026-07-28T23:59", "Phase 1a Closed");
+    createCountdown("phase2a-timer", "2026-08-31T23:59", "Phase 2a Closed");
+    // You can keep this timer initialized even if it's inactive, or comment it out entirely.
+    createCountdown("phase2b-timer_top", "2026-09-15T23:59", "Phase 2b Closed");
+    createCountdown("phase2b-timer_bottom", "2026-09-15T23:59", "Phase 2b Closed");
+
+});
+
 // ==========================================
 // CONFIGURATION: SET YOUR VARIABLES HERE
 // ==========================================
 // Note: +01:00 corresponds to CET. Adjust if daylight savings (CEST is +02:00) applies to your due date.
 createCountdown("phase1-timer", "2026-07-28T23:59", "Phase 1a Closed");
 createCountdown("phase2a-timer", "2026-08-31T23:59", "Phase 2a Closed");
-createCountdown("phase2b-timer", "2026-09-15T23:59", "Phase 2b Closed");
+createCountdown("phase2b-timer_top", "2026-09-15T23:59", "Phase 2b Closed");
+createCountdown("phase2b-timer_bottom", "2026-09-15T23:59", "Phase 2b Closed");
 </script>

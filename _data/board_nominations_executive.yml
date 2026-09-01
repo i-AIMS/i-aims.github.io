@@ -1,0 +1,36 @@
+nominees:
+  - name: "Birgit Helmlinger"
+    bio_title: "Secretary<br><br>"
+    image_file: "BirgitHelmlinger.jpeg"
+    motivation: |
+      I would be happy to take on the role of Secretary for the iAIMS Board. I enjoy bringing efficient structure to collaborative work and creating workflows that make tasks clear and accessible for everyone involved. In the labs I have worked in, I often prepared workflows and pipelines for operations that need to be performed by multiple people, with the aim of making processes easy to follow and reproducible. I would enjoy bringing this approach to organizing meetings, following up on action points, and maintaining shared information and communication. I see the Secretary role as an opportunity to support the Board behind the scenes, helping to maintain structure and focus while contributing to a well-functioning team.
+  - name: "Dominic Shadbolt"
+    bio_title: "Communications Officer"
+    image_file: "DominicShadbolt.jpeg"
+    motivation: |
+      After a long conversation with Stijn we have concluded that this is the role where I can add the most value. Our vision and values seem to align and at this conceptual stage I feel it would be rash to go into imagined details!
+  - name: "Mar Barrantes Cepas"
+    bio_title: "Chair-elect<br><br>"
+    image_file: "MarBarrantesCepas.jpg"
+    motivation: |
+      As someone working at the intersection of physics, neuroimaging, and MS, I have a strong interest in seeing the iAIMS community develop shared standards, promote interdisciplinary exchange, and translate methodological advances into clinical impact for people with MS. Being a chair-elect would let me help shape the community direction, connect researchers across groups and career stages, and make sure the community stays practical and outcome-focused. I have also served in other communities, which has given me experience in organizing and sustaining collaborative groups over time, as well as question assumptions and stress-test ideas to keep such a young community rigorous as it grows.
+  - name: "Maria Petracca"
+    bio_title: "DEI Officer<br><br>"
+    image_file: "MariaPetracca.png"
+    motivation: |
+      I strongly believe that ensuring diversification and inclusion is fundamental to profit from unique perspectives and shape the success of any meaningful endeavor. Adequate representation and valorization of diverse backgrounds and experiences is especially valuable in new and evolving organizations, providing a model of positive and enriching interactions while favoring creativity and problem solving.
+  - name: "Sirio Cocozza"
+    bio_title: "Treasurer & Funding Officer-elect"
+    image_file: "SirioCocozza.png"
+    motivation: |
+      I am excited to apply for the Treasurer and Funding Officer-Elect position, as it combines my interest in the field with the opportunity to contribute concretely to the committee’s growth and impact. I am organized, reliable, and comfortable taking responsibility for tasks that require accuracy, transparency, and forward planning. I would bring a proactive approach to managing resources, identifying funding opportunities, and ensuring that available funds are used effectively to support meaningful initiatives. Most importantly, I see this role as an opportunity to actively contribute to the committee while developing strong financial, organizational, and leadership skills.
+  - name: "Stijn Denissen"
+    bio_title: "Chair<br><br>"
+    image_file: "StijnDenissen.jpg"
+    motivation: |
+      As a neurological physiotherapist who spent his PhD crafting AI tools to better understand multiple sclerosis, I am painfully aware of the limitations that block true AI impact. The lack of interdisciplinary discussion led me to organize a brainstorm in Barcelona on the sidelines of ECTRIMS 2025. The creative and bottom-up energy from this event forged iAIMS, which is now a globally reputed concept acknowledged by ECTRIMS. By appointing me chair, I will formally lead iAIMS to pioneering AI literacy and tools for the good of people with MS. Loss functions against loss of function!
+  - name: "Tommy Broeders"
+    bio_title: "Treasurer & Funding Officer"
+    image_file: "TommyBroeders.jpg"
+    motivation: |
+      I am a clinical neuroscientist driven by the potential of computational approaches and AI to meaningfully advance care for people with MS. This motivates me to serve as Treasurer and Funding Officer at a moment when iAIMS is beginning to show real impact. I am eager to build on our momentum by strengthening the group’s financial backbone through strategic industry partnerships and well‑coordinated community‑driven funding efforts. With our first milestones achieved, I’m excited to help secure and steward the resources that will support innovative projects and reinforce the collaborative spirit that defines iAIMS as a community.

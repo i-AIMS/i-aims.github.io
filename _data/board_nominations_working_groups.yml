@@ -1,0 +1,21 @@
+nominees:
+  - name: "Giuseppe Pontillo"
+    bio_title: "Educational Lead<br><br>"
+    image_file: "GiuseppePontillo.png"
+    motivation: |
+      AI is poised to transform MS research and clinical management. This requires training a new generation of clinicians and researchers who are proficient in medical AI and understand its potential and limitations. As a clinician-scientist specializing in Neuroradiology, with a PhD in Digital Medicine, I have witnessed firsthand the growing impact of AI on clinical practice while closely following the technological advances driving its rapid evolution. This dual perspective gives me a unique understanding of both the opportunities and challenges that AI presents to the MS community, positioning me well to identify educational needs and contribute to high-impact learning initiatives.
+  - name: "Matěj Kudrna"
+    bio_title: "Coding Working Group Member"
+    image_file: "MatejKudrna.jpg"
+    motivation: |
+      I'm applying as a member because I want to strengthen my teamwork skills while contributing to iAIMS's coding standards and open science practices. I'm eager to learn from other developers and help maintain clean, accessible code.
+  - name: "Seyed Mohammad Mahdi Khadem "
+    bio_title: "Coding Lead"
+    image_file: "MehdiKhadem.jpg"
+    motivation: |
+      As a medical doctor and AI researcher, I build clinical AI in the open: Python machine-learning pipelines for surgical decision support, a RAG clinical question-answering system, and computer vision for laparoscopic surgery, documented on GitHub and in peer-reviewed publications. I also maintain my own website and automate workflows with n8n and Claude Code. Within iAIMS I already serve on the journal club organizational committee. As Coding Lead I would keep all iAIMS coding activities clean, transparent and in tune with open science principles: clear documentation, reviewed pull requests, reproducible examples, and a website members can rely on.
+  - name: "Vicent Caselles Ballester"
+    bio_title: "Coding Working Group member"
+    image_file: "VicentCasellesBallester.jpg"
+    motivation: |
+      I've been developing medical image processing methods since 2022, mainly in the context of image registration and image segmentation, for MRI (MS lesion segmentation) as well as X-ray based images. My experience has been mainly devoted to Python and R (for statistical analysis and plotting). My web dev knowledge is limited, although I am passionate in continuous learning and do it fast.

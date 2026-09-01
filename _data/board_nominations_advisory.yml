@@ -1,0 +1,26 @@
+nominees:
+  - name: "Guy Nagels"
+    bio_title: "Senior advisor"
+    image_file: "GuyNagels.jpg"
+    motivation: |
+      I am good at asking questions that keep the executive board members on edge
+  - name: "Iris-Katharina Penner"
+    bio_title: "Senior Advisor"
+    image_file: "IrisKatharinaPenner.jpg"
+    motivation: |
+      With my clinical and scientific background and given my longlasting research career in the field of MS cognition and fatigue, I guess this fits best. I can also be part of a working group if the topic fits my profile or being the treasurer since coming from Switzerland :)
+  - name: "Michael Dwyer"
+    bio_title: "Advisory board"
+    image_file: "MichaelDwyer.jpg"
+    motivation: |
+      I love the enthusiasm of this group and the tremendous potential for such multi-disciplinary interaction to make a real difference in MS research and clinical care.
+  - name: "Tjalf Ziemssen"
+    bio_title: "Senior advisor"
+    image_file: "TjalfZiemssen.jpeg"
+    motivation: |
+      I would be delighted to contribute to the iAIMS Board as a Senior Advisor, bringing more than 25 years of experience in MS care, clinical research, digital medicine, and interdisciplinary collaboration. I am particularly motivated to support iAIMS in translating innovative ideas into meaningful improvements for people with MS. I would like to contribute strategic guidance, an international network, and experience in building patient-centred research and care structures. Equally important to me is supporting the next generation of MS researchers and clinicians and helping iAIMS develop into a sustainable, innovative, and collaborative global community.
+  - name: "Tom Fuchs"
+    bio_title: "Clinical Liaison"
+    image_file: "TomFuchs.jpg"
+    motivation: |
+      As a physician scientist with uncommon technical expertise, I seek out opportunities to bridge physicians and scientists together. For instance, I actively publish articles in physician-facing magazines, and speak often in interviews for physician-facing media. I seek out these opportunities because I believe that physicians must be themselves at the table for conversations that drive the future of the field. Physicians are the gateway to patient care, yet need motivated communicators to engage them and lower the threshold for participation. I would be proud to act in this way for the future of AI in MS.
