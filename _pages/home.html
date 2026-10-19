@@ -41,7 +41,6 @@ permalink: /
         <h2>Latest AI x MS Research Papers</h2>
         <p class="pubmed-subtext">
           Powered by <b>Gregory-AI</b> from the <b>Brain Regeneration Observatory</b>. Explore it by clicking the link.<br>
-          Load 15 more papers each time on the bottom of the page, if available.
         </p>
       </div>
       <div class="pubmed-external-link">
@@ -65,8 +64,8 @@ permalink: /
       <div id="queryEditor" style="display: none; margin-top: 0.75rem;">
         <textarea id="pmQueryInput" rows="3" style="width: 100%; padding: 0.5rem; font-family: monospace; font-size: 0.8rem; border-radius: 4px; border: 1px solid #ccc;"></textarea>
         <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem;">
-          <button class="pm-btn pm-btn-primary" onclick="runCustomQuery()"><i class="fas fa-play"></i> Run Custom Search</button>
-          <button class="pm-btn pm-btn-secondary" onclick="resetQuery()"><i class="fas fa-undo"></i> Reset Default</button>
+          <button class="pm-btn pm-btn-primary" type="button" onclick="runCustomQuery()"><i class="fas fa-play"></i> Run Custom Search</button>
+          <button class="pm-btn pm-btn-secondary" type="button" onclick="resetQuery()"><i class="fas fa-undo"></i> Reset Default</button>
         </div>
       </div>
     </div>
@@ -85,10 +84,18 @@ permalink: /
           <option value="Biomarkers">Biomarkers & Genetics</option>
           <option value="General AI">General AI & ML</option>
         </select>
-        <button class="btn-refresh" onclick="fetchPubMedPapers(false)" id="pmRefreshBtn">
+        <button class="btn-refresh" type="button" onclick="fetchPubMedPapers()" id="pmRefreshBtn">
           <i class="fas fa-sync-alt" id="refreshIcon"></i> Refresh API
         </button>
       </div>
+    </div>
+
+    <!-- Results Count Slider -->
+    <div class="pubmed-slider-box" style="background: rgba(0,0,0,0.02); padding: 0.6rem 1rem; border-radius: 6px; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+      <label for="pmLimitSlider" style="font-size: 0.85rem; font-weight: 600; color: var(--primary-color); white-space: nowrap;">
+        <i class="fas fa-sliders-h"></i> Fetch Limit: <span id="sliderValDisplay" style="font-weight: 700;">15</span> papers
+      </label>
+      <input type="range" id="pmLimitSlider" min="10" max="100" step="5" value="15" style="flex: 1; min-width: 150px; cursor: pointer;" oninput="updateSliderLabel(this.value)" onchange="fetchPubMedPapers()">
     </div>
 
     <!-- Status Banner / Loading -->
@@ -100,15 +107,10 @@ permalink: /
     <!-- Pagination & Pagination Footer -->
     <div class="pubmed-footer-controls">
       <div class="pm-counter" id="pmCounter">Showing 0 papers</div>
-      <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
-        <button id="pmLoadMoreBtn" class="pm-btn pm-btn-secondary" onclick="fetchPubMedPapers(true)">
-          <i class="fas fa-plus-circle"></i> Load More (+15)
-        </button>
-        <div class="pm-pagination">
-          <button id="pmPrevBtn" onclick="changePage(-1)" disabled>Previous</button>
-          <span id="pmPageIndicator">Page 1</span>
-          <button id="pmNextBtn" onclick="changePage(1)">Next</button>
-        </div>
+      <div class="pm-pagination">
+        <button id="pmPrevBtn" type="button" onclick="changePage(-1)" disabled>Previous</button>
+        <span id="pmPageIndicator">Page 1</span>
+        <button id="pmNextBtn" type="button" onclick="changePage(1)">Next</button>
       </div>
     </div>
   </section>
