@@ -128,13 +128,18 @@ permalink: /
   let filteredPapers = [];
   let currentPage = 1;
   const pageSize = 6;
-  let currentOffset = 0;
-  const batchSize = 15;
+
+  function updateSliderLabel(val) {
+    const display = document.getElementById("sliderValDisplay");
+    if (display) display.innerText = val;
+  }
 
   function toggleQueryEditor() {
     const editor = document.getElementById("queryEditor");
     const icon = document.getElementById("toggleQueryIcon");
-    if (editor.style.display === "none") {
+    if (!editor || !icon) return;
+
+    if (editor.style.display === "none" || !editor.style.display) {
       editor.style.display = "block";
       icon.innerHTML = '<i class="fas fa-chevron-up"></i> Hide Editor';
     } else {
@@ -144,19 +149,24 @@ permalink: /
   }
 
   function runCustomQuery() {
-    const input = document.getElementById("pmQueryInput").value.trim();
+    const inputEl = document.getElementById("pmQueryInput");
+    if (!inputEl) return;
+    const input = inputEl.value.trim();
     if (input) {
       activeQuery = input;
-      document.getElementById("queryDisplay").innerText = activeQuery;
-      fetchPubMedPapers(false);
+      const qDisplay = document.getElementById("queryDisplay");
+      if (qDisplay) qDisplay.innerText = activeQuery;
+      fetchPubMedPapers();
     }
   }
 
   function resetQuery() {
     activeQuery = DEFAULT_PUBMED_QUERY;
-    document.getElementById("pmQueryInput").value = DEFAULT_PUBMED_QUERY;
-    document.getElementById("queryDisplay").innerText = DEFAULT_PUBMED_QUERY;
-    fetchPubMedPapers(false);
+    const inputEl = document.getElementById("pmQueryInput");
+    const qDisplay = document.getElementById("queryDisplay");
+    if (inputEl) inputEl.value = DEFAULT_PUBMED_QUERY;
+    if (qDisplay) qDisplay.innerText = DEFAULT_PUBMED_QUERY;
+    fetchPubMedPapers();
   }
 
   function categorizePaper(title, abstract) {
@@ -173,33 +183,31 @@ permalink: /
     return "General AI";
   }
 
-  async function fetchPubMedPapers(isLoadMore = false) {
+  async function fetchPubMedPapers() {
     const statusBanner = document.getElementById("pmStatusBanner");
     const refreshIcon = document.getElementById("refreshIcon");
+    const sliderEl = document.getElementById("pmLimitSlider");
+    const fetchLimit = sliderEl ? sliderEl.value : 15;
 
-    if (!isLoadMore) {
-      currentOffset = 0;
-      allPapers = [];
+    allPapers = [];
+
+    if (statusBanner) {
+      statusBanner.style.display = "block";
+      statusBanner.className = "pubmed-status";
+      statusBanner.innerText = `Querying PubMed for top ${fetchLimit} real-time papers & abstracts...`;
     }
-
-    statusBanner.style.display = "block";
-    statusBanner.className = "pubmed-status";
-    statusBanner.innerText = isLoadMore ? `Fetching next ${batchSize} papers...` : "Querying PubMed for real-time papers & abstracts...";
     if (refreshIcon) refreshIcon.classList.add("fa-spin");
 
     try {
-      // Step 1: ESearch to get PubMed IDs
-      const searchUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${encodeURIComponent(activeQuery)}&retmode=json&retstart=${currentOffset}&retmax=${batchSize}&sort=pub_date`;
+      // Step 1: ESearch to get PubMed IDs based on slider limit
+      const searchUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${encodeURIComponent(activeQuery)}&retmode=json&retstart=0&retmax=${fetchLimit}&sort=pub_date`;
       const searchResp = await fetch(searchUrl);
       if (!searchResp.ok) throw new Error("PubMed Search API error");
       const searchData = await searchResp.json();
       const idList = searchData.esearchresult?.idlist || [];
 
       if (idList.length === 0) {
-        if (!isLoadMore) throw new Error("No PubMed IDs returned");
-        statusBanner.className = "pubmed-status warning";
-        statusBanner.innerText = "No additional papers found on PubMed.";
-        return;
+        throw new Error("No PubMed IDs returned");
       }
 
       // Step 2: EFetch XML to retrieve FULL abstracts and complete citation metadata
@@ -262,27 +270,32 @@ permalink: /
         fetched.push({ pmid, title, authors, journal, year, abstract, category, doi });
       }
 
-      allPapers = [...allPapers, ...fetched];
-      currentOffset += fetched.length;
+      allPapers = fetched;
 
-      statusBanner.className = "pubmed-status success";
-      statusBanner.innerText = `Successfully loaded ${allPapers.length} papers directly from PubMed.`;
+      if (statusBanner) {
+        statusBanner.className = "pubmed-status success";
+        statusBanner.innerText = `Successfully loaded ${allPapers.length} papers directly from PubMed.`;
+      }
     } catch (err) {
       console.warn("PubMed API fetch failed.", err);
-      statusBanner.className = "pubmed-status warning";
-      statusBanner.innerText = "Error fetching papers from PubMed. Please check query syntax.";
+      if (statusBanner) {
+        statusBanner.className = "pubmed-status warning";
+        statusBanner.innerText = "Error fetching papers from PubMed. Please check query syntax.";
+      }
     } finally {
       if (refreshIcon) refreshIcon.classList.remove("fa-spin");
       setTimeout(() => {
-        statusBanner.style.display = "none";
+        if (statusBanner) statusBanner.style.display = "none";
       }, 4000);
       filterPapers();
     }
   }
 
   function filterPapers() {
-    const searchText = document.getElementById("pmSearchInput").value.toLowerCase();
-    const selectedCat = document.getElementById("pmCategorySelect").value;
+    const searchEl = document.getElementById("pmSearchInput");
+    const catEl = document.getElementById("pmCategorySelect");
+    const searchText = searchEl ? searchEl.value.toLowerCase() : "";
+    const selectedCat = catEl ? catEl.value : "ALL";
 
     filteredPapers = allPapers.filter(paper => {
       const matchesSearch = paper.title.toLowerCase().includes(searchText) ||
@@ -303,14 +316,16 @@ permalink: /
     const nextBtn = document.getElementById("pmNextBtn");
     const pageIndicator = document.getElementById("pmPageIndicator");
 
+    if (!grid) return;
+
     grid.innerHTML = "";
 
     if (filteredPapers.length === 0) {
       grid.innerHTML = `<div class="no-papers">No matching research papers found. Try adjusting your search query or filter.</div>`;
-      counter.innerText = "Showing 0 papers";
-      prevBtn.disabled = true;
-      nextBtn.disabled = true;
-      pageIndicator.innerText = "Page 1 of 1";
+      if (counter) counter.innerText = "Showing 0 papers";
+      if (prevBtn) prevBtn.disabled = true;
+      if (nextBtn) nextBtn.disabled = true;
+      if (pageIndicator) pageIndicator.innerText = "Page 1 of 1";
       return;
     }
 
@@ -358,10 +373,10 @@ permalink: /
       grid.appendChild(card);
     });
 
-    counter.innerText = `Showing ${startIdx + 1}–${endIdx} of ${filteredPapers.length} fetched papers`;
-    pageIndicator.innerText = `Page ${currentPage} of ${totalPages}`;
-    prevBtn.disabled = currentPage === 1;
-    nextBtn.disabled = currentPage === totalPages;
+    if (counter) counter.innerText = `Showing ${startIdx + 1}–${endIdx} of ${filteredPapers.length} fetched papers`;
+    if (pageIndicator) pageIndicator.innerText = `Page ${currentPage} of ${totalPages}`;
+    if (prevBtn) prevBtn.disabled = (currentPage === 1);
+    if (nextBtn) nextBtn.disabled = (currentPage === totalPages);
   }
 
   function changePage(direction) {
@@ -371,8 +386,10 @@ permalink: /
 
   // Initial load
   document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("queryDisplay").innerText = DEFAULT_PUBMED_QUERY;
-    document.getElementById("pmQueryInput").value = DEFAULT_PUBMED_QUERY;
-    fetchPubMedPapers(false);
+    const qDisplay = document.getElementById("queryDisplay");
+    const qInput = document.getElementById("pmQueryInput");
+    if (qDisplay) qDisplay.innerText = DEFAULT_PUBMED_QUERY;
+    if (qInput) qInput.value = DEFAULT_PUBMED_QUERY;
+    fetchPubMedPapers();
   });
 </script>
