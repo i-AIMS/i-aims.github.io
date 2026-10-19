@@ -1170,6 +1170,338 @@ select {
     margin: 0;
 }
 
+/* ==========================================================================
+   PubMed AI x MS Research Integration Styles (iAIMS Theme Matching)
+   ========================================================================== */
+
+.pubmed-section {
+  background: var(--card-background);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2.5rem 0;
+  border: 1px solid rgba(0, 102, 102, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.pubmed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.pubmed-header h2 {
+  margin: 0 0 0.4rem 0;
+  color: var(--primary-color);
+}
+
+.pubmed-subtext {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.cta-outline {
+  display: inline-block;
+  border: 1.5px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.cta-outline:hover {
+  background: var(--primary-color);
+  color: var(--main-background-color);
+}
+
+.pubmed-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+.search-box {
+  flex: 1 1 300px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: var(--main-background-color);
+  color: var(--main-text-color);
+  font-size: 0.9rem;
+}
+
+.filter-box {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.filter-box select {
+  padding: 0.65rem 1rem;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: var(--main-background-color);
+  color: var(--main-text-color);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn-refresh {
+  background: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  padding: 0.65rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-refresh:hover {
+  opacity: 0.9;
+}
+
+.pubmed-status {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+  background: rgba(0, 102, 102, 0.1);
+  color: var(--primary-color);
+  border-left: 4px solid var(--primary-color);
+}
+
+.pubmed-status.success {
+  background: rgba(40, 167, 69, 0.1);
+  color: #155724;
+  border-left-color: #28a745;
+}
+
+.pubmed-status.warning {
+  background: rgba(255, 193, 7, 0.15);
+  color: #856404;
+  border-left-color: #ffc107;
+}
+
+.pubmed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.pubmed-card {
+  background: var(--main-background-color);
+  border-radius: 8px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pubmed-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.pubmed-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-weight: 600;
+  background: rgba(0, 102, 102, 0.15);
+  color: var(--primary-color);
+}
+
+.pmid-tag {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  font-family: monospace;
+}
+
+.pubmed-card-title {
+  font-size: 1.05rem;
+  margin: 0 0 0.6rem 0;
+  line-height: 1.4;
+}
+
+.pubmed-card-title a {
+  color: var(--main-text-color);
+  text-decoration: none;
+}
+
+.pubmed-card-title a:hover {
+  color: var(--secondary-color);
+}
+
+.pubmed-authors {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-bottom: 0.4rem;
+}
+
+.pubmed-meta {
+  font-size: 0.8rem;
+  color: var(--primary-color);
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+/* --- Scrollable Abstract Styling --- */
+.pubmed-abstract-container {
+  margin-top: 0.75rem;
+  margin-bottom: 1.25rem;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 6px;
+  padding: 0.65rem 0.75rem;
+  border-left: 3px solid var(--primary-color);
+}
+
+.abstract-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--primary-color);
+  margin-bottom: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pubmed-abstract-scroll {
+  max-height: 110px;
+  overflow-y: auto;
+  padding-right: 0.4rem;
+}
+
+.pubmed-abstract-scroll p {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin: 0;
+  opacity: 0.88;
+}
+
+/* Custom Scrollbar for Abstract Box */
+.pubmed-abstract-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.pubmed-abstract-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pubmed-abstract-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0, 102, 102, 0.3);
+  border-radius: 4px;
+}
+
+.pubmed-abstract-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+.pubmed-card-footer {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.pm-btn {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.pm-btn-primary {
+  background: var(--primary-color);
+  color: #ffffff;
+}
+
+.pm-btn-secondary {
+  background: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.pm-btn:hover {
+  opacity: 0.85;
+}
+
+.pubmed-footer-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.pm-counter {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+.pm-pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pm-pagination button {
+  background: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.pm-pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.no-papers {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  opacity: 0.7;
+  font-style: italic;
+}
+
 
 
 /* Adaptive web design */

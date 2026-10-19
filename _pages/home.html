@@ -19,8 +19,6 @@ permalink: /
 </section>
 
 <section class="section">
-  <img src="/assets/images/iaims-home.png" alt="Illustration of AI and MS collaboration" style="max-width:100%; height:auto; margin-bottom:2rem;">
-  <h2>Our Goals</h2>
   <section class="cards">
     <div class="card">
       <h3>Unite</h3>
@@ -36,23 +34,345 @@ permalink: /
     </div>
   </section>
 
-  <section class="section">
-  <h2>What's happening now</h2>
-  <p>
-    The iAIMS community is taking shape. We are setting up our first educational events, preparing a journal club, 
-    and planning collaborative hackathons. This is an exciting moment to get involved and help shape what comes next.
-  </p>
-  <p>
-    If you are interested in joining these initiatives or contributing to future activities, we would be glad to welcome you.
-  </p>
-  <div class="hero-buttons">
-    <ul class="nav-links">
-      <a href="/events/" class="cta">Explore Events</a>
-      <a href="/join/" class="cta">Join the Community</a>
-    </ul>
-  </div>
+  <!-- ==================== PUBMED AI x MS RESEARCH EXPLORER ==================== -->
+  <section class="section pubmed-section">
+    <div class="pubmed-header">
+      <div>
+        <h2>Latest AI x MS Research Papers</h2>
+        <p class="pubmed-subtext">
+          Powered by <b>Gregory-AI</b> from the <b>Brain Regeneration Observatory</b>. Explore it by clicking the link.<br>
+          Load 15 more papers each time on the bottom of the page, if available.
+        </p>
+      </div>
+      <div class="pubmed-external-link">
+        <a href="https://brain-regeneration.com/conditions/multiple-sclerosis/research-papers/?category=91&sort=date&relevant=true" target="_blank" rel="noopener" class="cta-outline">
+          Explore Repository Index <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Active PubMed Search Query Display & Editor -->
+    <div class="pubmed-query-box" style="background: rgba(0,0,0,0.03); padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 1rem; border: 1px solid rgba(0,0,0,0.1);">
+      <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="toggleQueryEditor()">
+        <span style="font-size: 0.85rem; font-weight: 600; color: var(--primary-color);">
+          <i class="fas fa-search"></i> Active PubMed Query
+        </span>
+        <span id="toggleQueryIcon" style="font-size: 0.8rem; opacity: 0.7;"><i class="fas fa-chevron-down"></i> Edit Query</span>
+      </div>
+      <div id="queryDisplay" style="font-family: monospace; font-size: 0.8rem; opacity: 0.85; margin-top: 0.4rem; word-break: break-all;"></div>
+
+      <!-- Editable Query Area (Hidden by default) -->
+      <div id="queryEditor" style="display: none; margin-top: 0.75rem;">
+        <textarea id="pmQueryInput" rows="3" style="width: 100%; padding: 0.5rem; font-family: monospace; font-size: 0.8rem; border-radius: 4px; border: 1px solid #ccc;"></textarea>
+        <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem;">
+          <button class="pm-btn pm-btn-primary" onclick="runCustomQuery()"><i class="fas fa-play"></i> Run Custom Search</button>
+          <button class="pm-btn pm-btn-secondary" onclick="resetQuery()"><i class="fas fa-undo"></i> Reset Default</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search & Filter Controls -->
+    <div class="pubmed-controls">
+      <div class="search-box">
+        <input type="text" id="pmSearchInput" placeholder="Filter fetched papers by keyword, author, or journal..." onkeyup="filterPapers()">
+      </div>
+      <div class="filter-box">
+        <select id="pmCategorySelect" onchange="filterPapers()">
+          <option value="ALL">All Categories</option>
+          <option value="Neuroimaging">Neuroimaging & MRI</option>
+          <option value="Predictive Analytics">Predictive Analytics</option>
+          <option value="NLP / LLM">NLP & Large Language Models</option>
+          <option value="Biomarkers">Biomarkers & Genetics</option>
+          <option value="General AI">General AI & ML</option>
+        </select>
+        <button class="btn-refresh" onclick="fetchPubMedPapers(false)" id="pmRefreshBtn">
+          <i class="fas fa-sync-alt" id="refreshIcon"></i> Refresh API
+        </button>
+      </div>
+    </div>
+
+    <!-- Status Banner / Loading -->
+    <div id="pmStatusBanner" class="pubmed-status">Fetching latest research via PubMed E-utilities API...</div>
+
+    <!-- Papers Grid Container -->
+    <div id="pmPapersGrid" class="pubmed-grid"></div>
+
+    <!-- Pagination & Pagination Footer -->
+    <div class="pubmed-footer-controls">
+      <div class="pm-counter" id="pmCounter">Showing 0 papers</div>
+      <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+        <button id="pmLoadMoreBtn" class="pm-btn pm-btn-secondary" onclick="fetchPubMedPapers(true)">
+          <i class="fas fa-plus-circle"></i> Load More (+15)
+        </button>
+        <div class="pm-pagination">
+          <button id="pmPrevBtn" onclick="changePage(-1)" disabled>Previous</button>
+          <span id="pmPageIndicator">Page 1</span>
+          <button id="pmNextBtn" onclick="changePage(1)">Next</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ==================== END PUBMED RESEARCH EXPLORER ==================== -->
 </section>
 
+<!-- Include FontAwesome if not already present in layout -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+<!-- JavaScript Logic for PubMed Integration -->
+<script>
+  // Default PubMed Search String
+  const DEFAULT_PUBMED_QUERY = '("artificial intelligence"[ti] OR "machine learning"[ti] OR "deep learning"[ti] OR "neural network*"[ti] OR "computer vision"[ti]) AND ("multiple sclerosis"[ti] OR "radiologic* isolated syndrom*"[ti] OR "clinic* isolated syndrom*"[ti])';
+  let activeQuery = DEFAULT_PUBMED_QUERY;
 
-</section>
+  let allPapers = [];
+  let filteredPapers = [];
+  let currentPage = 1;
+  const pageSize = 6;
+  let currentOffset = 0;
+  const batchSize = 15;
+
+  function toggleQueryEditor() {
+    const editor = document.getElementById("queryEditor");
+    const icon = document.getElementById("toggleQueryIcon");
+    if (editor.style.display === "none") {
+      editor.style.display = "block";
+      icon.innerHTML = '<i class="fas fa-chevron-up"></i> Hide Editor';
+    } else {
+      editor.style.display = "none";
+      icon.innerHTML = '<i class="fas fa-chevron-down"></i> Edit Query';
+    }
+  }
+
+  function runCustomQuery() {
+    const input = document.getElementById("pmQueryInput").value.trim();
+    if (input) {
+      activeQuery = input;
+      document.getElementById("queryDisplay").innerText = activeQuery;
+      fetchPubMedPapers(false);
+    }
+  }
+
+  function resetQuery() {
+    activeQuery = DEFAULT_PUBMED_QUERY;
+    document.getElementById("pmQueryInput").value = DEFAULT_PUBMED_QUERY;
+    document.getElementById("queryDisplay").innerText = DEFAULT_PUBMED_QUERY;
+    fetchPubMedPapers(false);
+  }
+
+  function categorizePaper(title, abstract) {
+    const text = (title + " " + abstract).toLowerCase();
+    if (text.includes("mri") || text.includes("lesion") || text.includes("segmentation") || text.includes("image") || text.includes("imaging") || text.includes("brain")) {
+      return "Neuroimaging";
+    } else if (text.includes("predict") || text.includes("disability") || text.includes("edss") || text.includes("progression") || text.includes("risk")) {
+      return "Predictive Analytics";
+    } else if (text.includes("nlp") || text.includes("text") || text.includes("language") || text.includes("bert") || text.includes("llm") || text.includes("gpt")) {
+      return "NLP / LLM";
+    } else if (text.includes("biomarker") || text.includes("gene") || text.includes("omics") || text.includes("blood") || text.includes("serum")) {
+      return "Biomarkers";
+    }
+    return "General AI";
+  }
+
+  async function fetchPubMedPapers(isLoadMore = false) {
+    const statusBanner = document.getElementById("pmStatusBanner");
+    const refreshIcon = document.getElementById("refreshIcon");
+
+    if (!isLoadMore) {
+      currentOffset = 0;
+      allPapers = [];
+    }
+
+    statusBanner.style.display = "block";
+    statusBanner.className = "pubmed-status";
+    statusBanner.innerText = isLoadMore ? `Fetching next ${batchSize} papers...` : "Querying PubMed for real-time papers & abstracts...";
+    if (refreshIcon) refreshIcon.classList.add("fa-spin");
+
+    try {
+      // Step 1: ESearch to get PubMed IDs
+      const searchUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${encodeURIComponent(activeQuery)}&retmode=json&retstart=${currentOffset}&retmax=${batchSize}&sort=pub_date`;
+      const searchResp = await fetch(searchUrl);
+      if (!searchResp.ok) throw new Error("PubMed Search API error");
+      const searchData = await searchResp.json();
+      const idList = searchData.esearchresult?.idlist || [];
+
+      if (idList.length === 0) {
+        if (!isLoadMore) throw new Error("No PubMed IDs returned");
+        statusBanner.className = "pubmed-status warning";
+        statusBanner.innerText = "No additional papers found on PubMed.";
+        return;
+      }
+
+      // Step 2: EFetch XML to retrieve FULL abstracts and complete citation metadata
+      const fetchUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=${idList.join(",")}&retmode=xml`;
+      const fetchResp = await fetch(fetchUrl);
+      if (!fetchResp.ok) throw new Error("PubMed Fetch API error");
+      const xmlText = await fetchResp.text();
+
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+      const articles = xmlDoc.getElementsByTagName("PubmedArticle");
+
+      const fetched = [];
+
+      for (let i = 0; i < articles.length; i++) {
+        const art = articles[i];
+
+        const pmidEl = art.querySelector("MedlineCitation > PMID");
+        const pmid = pmidEl ? pmidEl.textContent.trim() : "";
+
+        const titleEl = art.querySelector("ArticleTitle");
+        let title = titleEl ? titleEl.textContent.trim() : "Untitled Study";
+        title = title.replace(/\[\vert{}\]/g, "");
+
+        const abstractNodes = art.querySelectorAll("AbstractText");
+        let abstract = "";
+        if (abstractNodes.length > 0) {
+          abstract = Array.from(abstractNodes)
+            .map(node => {
+              const label = node.getAttribute("Label");
+              return label ? `<strong>${label}:</strong> ${node.textContent.trim()}` : node.textContent.trim();
+            })
+            .join("<br><br>");
+        } else {
+          abstract = "<em>No abstract text available for this publication entry on PubMed. Full article available via publisher repository.</em>";
+        }
+
+        const authorNodes = art.querySelectorAll("AuthorList > Author");
+        let authors = "Authors unavailable";
+        if (authorNodes.length > 0) {
+          const authorArr = Array.from(authorNodes).slice(0, 3).map(a => {
+            const lastName = a.querySelector("LastName")?.textContent || "";
+            const initials = a.querySelector("Initials")?.textContent || "";
+            return `${lastName} ${initials}`.trim();
+          }).filter(Boolean);
+          authors = authorArr.join(", ") + (authorNodes.length > 3 ? " et al." : "");
+        }
+
+        const journalEl = art.querySelector("Journal > Title") || art.querySelector("Journal > ISOAbbreviation");
+        const journal = journalEl ? journalEl.textContent.trim() : "PubMed Journal";
+
+        const yearEl = art.querySelector("JournalIssue > PubDate > Year") || art.querySelector("DateCompleted > Year");
+        const year = yearEl ? yearEl.textContent.trim() : "2024";
+
+        const doiEl = art.querySelector("ArticleIdList > ArticleId[IdType='doi']");
+        const doi = doiEl ? doiEl.textContent.trim() : "";
+
+        const category = categorizePaper(title, abstract);
+
+        fetched.push({ pmid, title, authors, journal, year, abstract, category, doi });
+      }
+
+      allPapers = [...allPapers, ...fetched];
+      currentOffset += fetched.length;
+
+      statusBanner.className = "pubmed-status success";
+      statusBanner.innerText = `Successfully loaded ${allPapers.length} papers directly from PubMed.`;
+    } catch (err) {
+      console.warn("PubMed API fetch failed.", err);
+      statusBanner.className = "pubmed-status warning";
+      statusBanner.innerText = "Error fetching papers from PubMed. Please check query syntax.";
+    } finally {
+      if (refreshIcon) refreshIcon.classList.remove("fa-spin");
+      setTimeout(() => {
+        statusBanner.style.display = "none";
+      }, 4000);
+      filterPapers();
+    }
+  }
+
+  function filterPapers() {
+    const searchText = document.getElementById("pmSearchInput").value.toLowerCase();
+    const selectedCat = document.getElementById("pmCategorySelect").value;
+
+    filteredPapers = allPapers.filter(paper => {
+      const matchesSearch = paper.title.toLowerCase().includes(searchText) ||
+                            paper.authors.toLowerCase().includes(searchText) ||
+                            paper.journal.toLowerCase().includes(searchText);
+      const matchesCat = (selectedCat === "ALL") || (paper.category === selectedCat);
+      return matchesSearch && matchesCat;
+    });
+
+    currentPage = 1;
+    renderPapers();
+  }
+
+  function renderPapers() {
+    const grid = document.getElementById("pmPapersGrid");
+    const counter = document.getElementById("pmCounter");
+    const prevBtn = document.getElementById("pmPrevBtn");
+    const nextBtn = document.getElementById("pmNextBtn");
+    const pageIndicator = document.getElementById("pmPageIndicator");
+
+    grid.innerHTML = "";
+
+    if (filteredPapers.length === 0) {
+      grid.innerHTML = `<div class="no-papers">No matching research papers found. Try adjusting your search query or filter.</div>`;
+      counter.innerText = "Showing 0 papers";
+      prevBtn.disabled = true;
+      nextBtn.disabled = true;
+      pageIndicator.innerText = "Page 1 of 1";
+      return;
+    }
+
+    const totalPages = Math.ceil(filteredPapers.length / pageSize);
+    const startIdx = (currentPage - 1) * pageSize;
+    const endIdx = Math.min(startIdx + pageSize, filteredPapers.length);
+    const pagePapers = filteredPapers.slice(startIdx, endIdx);
+
+    pagePapers.forEach(paper => {
+      const card = document.createElement("div");
+      card.className = "pubmed-card";
+
+      const pubmedLink = `https://pubmed.ncbi.nlm.nih.gov/${paper.pmid}/`;
+      const doiLink = paper.doi ? `https://doi.org/${paper.doi}` : pubmedLink;
+
+      card.innerHTML = `
+        <div>
+          <div class="pubmed-card-header">
+            <span class="badge badge-${paper.category.replace(/[^a-zA-Z]/g, '')}">${paper.category}</span>
+            <span class="pmid-tag">PMID: ${paper.pmid}</span>
+          </div>
+          <h3 class="pubmed-card-title">
+            <a href="${pubmedLink}" target="_blank" rel="noopener">${paper.title}</a>
+          </h3>
+          <div class="pubmed-authors"><i class="fas fa-users"></i> ${paper.authors}</div>
+          <div class="pubmed-meta">
+            <span><i class="fas fa-book-open"></i> ${paper.journal} (${paper.year})</span>
+          </div>
+
+          <div class="pubmed-abstract-container">
+            <div class="abstract-label"><i class="fas fa-align-left"></i> Abstract</div>
+            <div class="pubmed-abstract-scroll">
+              <p>${paper.abstract}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pubmed-card-footer">
+          <a href="${pubmedLink}" target="_blank" rel="noopener" class="pm-btn pm-btn-primary">
+            PubMed <i class="fas fa-external-link-alt"></i>
+          </a>
+          ${paper.doi ? `<a href="${doiLink}" target="_blank" rel="noopener" class="pm-btn pm-btn-secondary">DOI <i class="fas fa-link"></i></a>` : ''}
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    counter.innerText = `Showing ${startIdx + 1}–${endIdx} of ${filteredPapers.length} fetched papers`;
+    pageIndicator.innerText = `Page ${currentPage} of ${totalPages}`;
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = currentPage === totalPages;
+  }
+
+  function changePage(direction) {
+    currentPage += direction;
+    renderPapers();
+  }
+
+  // Initial load
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("queryDisplay").innerText = DEFAULT_PUBMED_QUERY;
+    document.getElementById("pmQueryInput").value = DEFAULT_PUBMED_QUERY;
+    fetchPubMedPapers(false);
+  });
+</script>
