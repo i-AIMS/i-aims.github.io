@@ -2,9 +2,11 @@ name: Fetch Latest Research Articles
 
 on:
   schedule:
-    # Runs daily at midnight UTC
     - cron: '0 0 * * *'
-  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: write # <-- This fixes the permission denied error
 
 jobs:
   fetch-data:
@@ -18,7 +20,7 @@ jobs:
 
       - name: Download Articles from Brain Regeneration API
         run: |
-          curl -s "https://api.brain-regeneration.com/articles/?subject_id=17" -o _data/articles.json
+          curl -s "https://api.brain-regeneration.com/articles/?limit=100" -o _data/articles.json
 
       - name: Commit and Push Updated Data
         uses: stefanzweifel/git-auto-commit-action@v5
