@@ -36,39 +36,19 @@ permalink: /
     </div>
   </section>
 
-  <!-- ==================== PUBMED AI x MS RESEARCH EXPLORER ==================== -->
+  <!-- ==================== RESEARCH EXPLORER ==================== -->
   <section class="section pubmed-section">
     <div class="pubmed-header">
       <div>
         <h2>Latest AI x MS Research Papers</h2>
         <p class="pubmed-subtext">
-          Powered by <b>Gregory-AI</b> from the <b>Brain Regeneration Observatory</b>. Explore it by clicking the link.<br>
+          Powered by <b>Gregory-AI</b> from the <b>Brain Regeneration Observatory</b>.
         </p>
       </div>
       <div class="pubmed-external-link">
         <a href="https://brain-regeneration.com/conditions/multiple-sclerosis/research-papers/?category=91&sort=date&relevant=true" target="_blank" rel="noopener" class="cta-outline">
           Explore Repository Index <i class="fas fa-external-link-alt"></i>
         </a>
-      </div>
-    </div>
-
-    <!-- Active PubMed Search Query Display & Editor -->
-    <div class="pubmed-query-box" style="background: rgba(0,0,0,0.03); padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 1rem; border: 1px solid rgba(0,0,0,0.1);">
-      <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="toggleQueryEditor()">
-        <span style="font-size: 0.85rem; font-weight: 600; color: var(--primary-color);">
-          <i class="fas fa-search"></i> Active PubMed Query
-        </span>
-        <span id="toggleQueryIcon" style="font-size: 0.8rem; opacity: 0.7;"><i class="fas fa-chevron-down"></i> Edit Query</span>
-      </div>
-      <div id="queryDisplay" style="font-family: monospace; font-size: 0.8rem; opacity: 0.85; margin-top: 0.4rem; word-break: break-all;"></div>
-
-      <!-- Editable Query Area (Hidden by default) -->
-      <div id="queryEditor" style="display: none; margin-top: 0.75rem;">
-        <textarea id="pmQueryInput" rows="3" style="width: 100%; padding: 0.5rem; font-family: monospace; font-size: 0.8rem; border-radius: 4px; border: 1px solid #ccc;"></textarea>
-        <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem;">
-          <button class="pm-btn pm-btn-primary" type="button" onclick="runCustomQuery()"><i class="fas fa-play"></i> Run Custom Search</button>
-          <button class="pm-btn pm-btn-secondary" type="button" onclick="resetQuery()"><i class="fas fa-undo"></i> Reset Default</button>
-        </div>
       </div>
     </div>
 
@@ -86,8 +66,8 @@ permalink: /
           <option value="Biomarkers">Biomarkers & Genetics</option>
           <option value="General AI">General AI & ML</option>
         </select>
-        <button class="btn-refresh" type="button" onclick="fetchPubMedPapers()" id="pmRefreshBtn">
-          <i class="fas fa-sync-alt" id="refreshIcon"></i> Refresh API
+        <button class="btn-refresh" type="button" onclick="loadResearchArticles()" id="pmRefreshBtn">
+          <i class="fas fa-sync-alt" id="refreshIcon"></i> Refresh View
         </button>
       </div>
     </div>
@@ -95,13 +75,13 @@ permalink: /
     <!-- Results Count Slider -->
     <div class="pubmed-slider-box" style="background: rgba(0,0,0,0.02); padding: 0.6rem 1rem; border-radius: 6px; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
       <label for="pmLimitSlider" style="font-size: 0.85rem; font-weight: 600; color: var(--primary-color); white-space: nowrap;">
-        <i class="fas fa-sliders-h"></i> Fetch Limit: <span id="sliderValDisplay" style="font-weight: 700;">15</span> papers
+        <i class="fas fa-sliders-h"></i> Display Limit: <span id="sliderValDisplay" style="font-weight: 700;">15</span> papers
       </label>
-      <input type="range" id="pmLimitSlider" min="10" max="100" step="5" value="15" style="flex: 1; min-width: 150px; cursor: pointer;" oninput="updateSliderLabel(this.value)" onchange="fetchPubMedPapers()">
+      <input type="range" id="pmLimitSlider" min="10" max="100" step="5" value="15" style="flex: 1; min-width: 150px; cursor: pointer;" oninput="updateSliderLabel(this.value)" onchange="loadResearchArticles()">
     </div>
 
     <!-- Status Banner / Loading -->
-    <div id="pmStatusBanner" class="pubmed-status">Fetching latest research via PubMed E-utilities API...</div>
+    <div id="pmStatusBanner" class="pubmed-status">Loading latest AI x MS research dataset...</div>
 
     <!-- Papers Grid Container -->
     <div id="pmPapersGrid" class="pubmed-grid"></div>
@@ -116,17 +96,43 @@ permalink: /
       </div>
     </div>
   </section>
-  <!-- ==================== END PUBMED RESEARCH EXPLORER ==================== -->
+  <!-- ==================== END RESEARCH EXPLORER ==================== -->
 </section>
 
 <!-- Include FontAwesome if not already present in layout -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- JavaScript Logic for PubMed Integration -->
+<!-- Additional CSS Styling for Lower-Right Date Stamp -->
+<style>
+  .pubmed-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .pubmed-card-footer-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .pubmed-card-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .pub-date-stamp {
+    font-size: 0.75rem;
+    color: #888888;
+    font-style: italic;
+    white-space: nowrap;
+  }
+</style>
+
+<!-- JavaScript Logic for Research Integration -->
 <script>
-  // Default PubMed Search String
-  const DEFAULT_PUBMED_QUERY = '("artificial intelligence"[ti] OR "machine learning"[ti] OR "deep learning"[ti] OR "neural network*"[ti] OR "computer vision"[ti]) AND ("multiple sclerosis"[ti] OR "radiologic* isolated syndrom*"[ti] OR "clinic* isolated syndrom*"[ti])';
-  let activeQuery = DEFAULT_PUBMED_QUERY;
+  // Build-time dataset fetched via GitHub Actions or local _data JSON
+  const rawBuildTimeArticles = {% if site.data.articles %}{{ site.data.articles | jsonify }}{% elsif site.data.brain_regeneration_articles %}{{ site.data.brain_regeneration_articles | jsonify }}{% else %}null{% endif %};
 
   let allPapers = [];
   let filteredPapers = [];
@@ -136,41 +142,6 @@ permalink: /
   function updateSliderLabel(val) {
     const display = document.getElementById("sliderValDisplay");
     if (display) display.innerText = val;
-  }
-
-  function toggleQueryEditor() {
-    const editor = document.getElementById("queryEditor");
-    const icon = document.getElementById("toggleQueryIcon");
-    if (!editor || !icon) return;
-
-    if (editor.style.display === "none" || !editor.style.display) {
-      editor.style.display = "block";
-      icon.innerHTML = '<i class="fas fa-chevron-up"></i> Hide Editor';
-    } else {
-      editor.style.display = "none";
-      icon.innerHTML = '<i class="fas fa-chevron-down"></i> Edit Query';
-    }
-  }
-
-  function runCustomQuery() {
-    const inputEl = document.getElementById("pmQueryInput");
-    if (!inputEl) return;
-    const input = inputEl.value.trim();
-    if (input) {
-      activeQuery = input;
-      const qDisplay = document.getElementById("queryDisplay");
-      if (qDisplay) qDisplay.innerText = activeQuery;
-      fetchPubMedPapers();
-    }
-  }
-
-  function resetQuery() {
-    activeQuery = DEFAULT_PUBMED_QUERY;
-    const inputEl = document.getElementById("pmQueryInput");
-    const qDisplay = document.getElementById("queryDisplay");
-    if (inputEl) inputEl.value = DEFAULT_PUBMED_QUERY;
-    if (qDisplay) qDisplay.innerText = DEFAULT_PUBMED_QUERY;
-    fetchPubMedPapers();
   }
 
   function categorizePaper(title, abstract) {
@@ -187,112 +158,80 @@ permalink: /
     return "General AI";
   }
 
-  async function fetchPubMedPapers() {
+  function cleanJatsXml(text) {
+    if (!text) return "<em>No abstract available for this paper entry.</em>";
+    return text
+      .replace(/<jats:title>.*?<\/jats:title>/gi, "")
+      .replace(/<\/?jats:[^>]+>/gi, "")
+      .replace(/\[\vert{}\]/g, "")
+      .trim();
+  }
+
+  function parseAuthors(authorsData) {
+    if (!authorsData) return "Authors unavailable";
+    if (Array.isArray(authorsData)) {
+      if (authorsData.length === 0) return "Authors unavailable";
+      const names = authorsData.map(a => {
+        if (typeof a === 'string') return a;
+        return a.full_name || `${a.given_name || ''} ${a.family_name || ''}`.trim();
+      }).filter(Boolean);
+
+      if (names.length === 0) return "Authors unavailable";
+      return names.slice(0, 3).join(", ") + (names.length > 3 ? " et al." : "");
+    }
+    return typeof authorsData === 'string' ? authorsData : "Authors unavailable";
+  }
+
+  function parseArticlesData(rawData, limit) {
+    if (!rawData) return [];
+    const articlesList = Array.isArray(rawData) ? rawData : (rawData.results || rawData.articles || []);
+
+    return articlesList.slice(0, limit).map(item => {
+      const title = item.title ? item.title.replace(/\[\vert{}\]/g, "").trim() : "Untitled Study";
+      const abstract = cleanJatsXml(item.summary || item.abstract);
+      const authors = parseAuthors(item.authors);
+      const journal = item.container_title || item.publisher || item.journal || item.source || "Brain Regeneration Observatory";
+
+      const rawDate = item.published_date || item.publication_date || item.date || "";
+      const pubDateFormatted = rawDate ? rawDate.split("T")[0] : "";
+      const year = pubDateFormatted ? pubDateFormatted.split("-")[0] : (item.year || "2024");
+
+      const pmid = item.pmid || item.pubmed_id || "";
+      const doi = item.doi || "";
+      const url = item.link || (item.links && Object.values(item.links)[0]) || item.url || "";
+      const category = categorizePaper(title, abstract);
+
+      return { pmid, title, authors, journal, year, pubDateFormatted, abstract, category, doi, url };
+    });
+  }
+
+  function loadResearchArticles() {
     const statusBanner = document.getElementById("pmStatusBanner");
     const refreshIcon = document.getElementById("refreshIcon");
     const sliderEl = document.getElementById("pmLimitSlider");
-    const fetchLimit = sliderEl ? sliderEl.value : 15;
+    const limit = sliderEl ? parseInt(sliderEl.value) : 15;
 
-    allPapers = [];
-
-    if (statusBanner) {
-      statusBanner.style.display = "block";
-      statusBanner.className = "pubmed-status";
-      statusBanner.innerText = `Querying PubMed for top ${fetchLimit} real-time papers & abstracts...`;
-    }
     if (refreshIcon) refreshIcon.classList.add("fa-spin");
 
-    try {
-      // Step 1: ESearch to get PubMed IDs based on slider limit
-      const searchUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${encodeURIComponent(activeQuery)}&retmode=json&retstart=0&retmax=${fetchLimit}&sort=pub_date`;
-      const searchResp = await fetch(searchUrl);
-      if (!searchResp.ok) throw new Error("PubMed Search API error");
-      const searchData = await searchResp.json();
-      const idList = searchData.esearchresult?.idlist || [];
-
-      if (idList.length === 0) {
-        throw new Error("No PubMed IDs returned");
-      }
-
-      // Step 2: EFetch XML to retrieve FULL abstracts and complete citation metadata
-      const fetchUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=${idList.join(",")}&retmode=xml`;
-      const fetchResp = await fetch(fetchUrl);
-      if (!fetchResp.ok) throw new Error("PubMed Fetch API error");
-      const xmlText = await fetchResp.text();
-
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(xmlText, "text/xml");
-      const articles = xmlDoc.getElementsByTagName("PubmedArticle");
-
-      const fetched = [];
-
-      for (let i = 0; i < articles.length; i++) {
-        const art = articles[i];
-
-        const pmidEl = art.querySelector("MedlineCitation > PMID");
-        const pmid = pmidEl ? pmidEl.textContent.trim() : "";
-
-        const titleEl = art.querySelector("ArticleTitle");
-        let title = titleEl ? titleEl.textContent.trim() : "Untitled Study";
-        title = title.replace(/\[\vert{}\]/g, "");
-
-        const abstractNodes = art.querySelectorAll("AbstractText");
-        let abstract = "";
-        if (abstractNodes.length > 0) {
-          abstract = Array.from(abstractNodes)
-            .map(node => {
-              const label = node.getAttribute("Label");
-              return label ? `<strong>${label}:</strong> ${node.textContent.trim()}` : node.textContent.trim();
-            })
-            .join("<br><br>");
-        } else {
-          abstract = "<em>No abstract text available for this publication entry on PubMed. Full article available via publisher repository.</em>";
-        }
-
-        const authorNodes = art.querySelectorAll("AuthorList > Author");
-        let authors = "Authors unavailable";
-        if (authorNodes.length > 0) {
-          const authorArr = Array.from(authorNodes).slice(0, 3).map(a => {
-            const lastName = a.querySelector("LastName")?.textContent || "";
-            const initials = a.querySelector("Initials")?.textContent || "";
-            return `${lastName} ${initials}`.trim();
-          }).filter(Boolean);
-          authors = authorArr.join(", ") + (authorNodes.length > 3 ? " et al." : "");
-        }
-
-        const journalEl = art.querySelector("Journal > Title") || art.querySelector("Journal > ISOAbbreviation");
-        const journal = journalEl ? journalEl.textContent.trim() : "PubMed Journal";
-
-        const yearEl = art.querySelector("JournalIssue > PubDate > Year") || art.querySelector("DateCompleted > Year");
-        const year = yearEl ? yearEl.textContent.trim() : "2024";
-
-        const doiEl = art.querySelector("ArticleIdList > ArticleId[IdType='doi']");
-        const doi = doiEl ? doiEl.textContent.trim() : "";
-
-        const category = categorizePaper(title, abstract);
-
-        fetched.push({ pmid, title, authors, journal, year, abstract, category, doi });
-      }
-
-      allPapers = fetched;
-
+    if (rawBuildTimeArticles) {
+      allPapers = parseArticlesData(rawBuildTimeArticles, limit);
       if (statusBanner) {
+        statusBanner.style.display = "block";
         statusBanner.className = "pubmed-status success";
-        statusBanner.innerText = `Successfully loaded ${allPapers.length} papers directly from PubMed.`;
+        statusBanner.innerText = `Loaded ${allPapers.length} articles from Brain Regeneration Observatory dataset.`;
       }
-    } catch (err) {
-      console.warn("PubMed API fetch failed.", err);
+    } else {
+      allPapers = [];
       if (statusBanner) {
+        statusBanner.style.display = "block";
         statusBanner.className = "pubmed-status warning";
-        statusBanner.innerText = "Error fetching papers from PubMed. Please check query syntax.";
+        statusBanner.innerText = "No local articles dataset found in _data/articles.json.";
       }
-    } finally {
-      if (refreshIcon) refreshIcon.classList.remove("fa-spin");
-      setTimeout(() => {
-        if (statusBanner) statusBanner.style.display = "none";
-      }, 4000);
-      filterPapers();
     }
+
+    if (refreshIcon) refreshIcon.classList.remove("fa-spin");
+    setTimeout(() => { if (statusBanner) statusBanner.style.display = "none"; }, 3000);
+    filterPapers();
   }
 
   function filterPapers() {
@@ -342,17 +281,17 @@ permalink: /
       const card = document.createElement("div");
       card.className = "pubmed-card";
 
-      const pubmedLink = `https://pubmed.ncbi.nlm.nih.gov/${paper.pmid}/`;
-      const doiLink = paper.doi ? `https://doi.org/${paper.doi}` : pubmedLink;
+      const targetLink = paper.url || (paper.pmid ? `https://pubmed.ncbi.nlm.nih.gov/${paper.pmid}/` : "#");
+      const doiLink = paper.doi ? `https://doi.org/${paper.doi}` : targetLink;
 
       card.innerHTML = `
         <div>
           <div class="pubmed-card-header">
             <span class="badge badge-${paper.category.replace(/[^a-zA-Z]/g, '')}">${paper.category}</span>
-            <span class="pmid-tag">PMID: ${paper.pmid}</span>
+            <span class="pmid-tag">${paper.pmid ? 'PMID: ' + paper.pmid : 'Brain Regeneration ID'}</span>
           </div>
           <h3 class="pubmed-card-title">
-            <a href="${pubmedLink}" target="_blank" rel="noopener">${paper.title}</a>
+            <a href="${targetLink}" target="_blank" rel="noopener">${paper.title}</a>
           </h3>
           <div class="pubmed-authors"><i class="fas fa-users"></i> ${paper.authors}</div>
           <div class="pubmed-meta">
@@ -367,11 +306,14 @@ permalink: /
           </div>
         </div>
 
-        <div class="pubmed-card-footer">
-          <a href="${pubmedLink}" target="_blank" rel="noopener" class="pm-btn pm-btn-primary">
-            PubMed <i class="fas fa-external-link-alt"></i>
-          </a>
-          ${paper.doi ? `<a href="${doiLink}" target="_blank" rel="noopener" class="pm-btn pm-btn-secondary">DOI <i class="fas fa-link"></i></a>` : ''}
+        <div class="pubmed-card-footer-wrapper">
+          <div class="pubmed-card-actions">
+            <a href="${targetLink}" target="_blank" rel="noopener" class="pm-btn pm-btn-primary">
+              Article Link <i class="fas fa-external-link-alt"></i>
+            </a>
+            ${paper.doi ? `<a href="${doiLink}" target="_blank" rel="noopener" class="pm-btn pm-btn-secondary">DOI <i class="fas fa-link"></i></a>` : ''}
+          </div>
+          ${paper.pubDateFormatted ? `<span class="pub-date-stamp">Published: ${paper.pubDateFormatted}</span>` : ''}
         </div>
       `;
       grid.appendChild(card);
@@ -390,10 +332,6 @@ permalink: /
 
   // Initial load
   document.addEventListener("DOMContentLoaded", () => {
-    const qDisplay = document.getElementById("queryDisplay");
-    const qInput = document.getElementById("pmQueryInput");
-    if (qDisplay) qDisplay.innerText = DEFAULT_PUBMED_QUERY;
-    if (qInput) qInput.value = DEFAULT_PUBMED_QUERY;
-    fetchPubMedPapers();
+    loadResearchArticles();
   });
 </script>
