@@ -20,7 +20,7 @@ jobs:
 
       - name: Download Articles from Brain Regeneration API
         run: |
-          curl -s "https://api.brain-regeneration.com/articles/?subject_id=17" -o _data/articles.json
+          curl -s "https://api.brain-regeneration.com/articles/?format=json&subject_id=17&published_date_after=2026-10-14&ordering=-ml_score%60" -o _data/articles.json
 
       - name: Commit and Push Updated Data
         uses: stefanzweifel/git-auto-commit-action@v5
