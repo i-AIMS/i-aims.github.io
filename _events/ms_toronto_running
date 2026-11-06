@@ -5,7 +5,7 @@ time: "07:00"                           # Uncomment and complete "Hh:Mm" if we h
 timezone: "EDT"                         # Uncomment and complete "three-letter timezone" if we have a time
 location: "Ivy. Coffee shop, Toronto"
 type: "Sports"
-status: "upcoming"
+status: "past"
 ics: "/assets/ics/2026-10-22_aims_running_event.ics"
 ---
 

@@ -5,7 +5,7 @@ time: "20:00"                           # Uncomment and complete "Hh:Mm" if we h
 timezone: "EDT"                         # Uncomment and complete "three-letter timezone" if we have a time
 location: "InterContinental Toronto Centre"
 type: "Drinks + informal update"
-status: "upcoming"
+status: "past"
 #ics: "/assets/ics/..."
 ---
 
