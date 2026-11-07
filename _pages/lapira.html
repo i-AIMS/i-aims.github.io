@@ -5,11 +5,203 @@ permalink: /lapira/
 ---
 
 <section class="section">
+    <title>LaPIRA: Latent PIRA State Visualizer (3D Projection)</title>
+    <style>
+        /* =================== STYLING =================== */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; background-color: #f4f7fa; margin: 0; padding: 20px; }
+        .container { display: flex; width: 100%; max-width: 1600px; gap: 30px; }
 
-  <h1>LaPIRA</h1>
+        /* Input Control Panel */
+        #controls { flex: 1; background: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); height: fit-content;}
+        h3 { color: #005A87; margin-bottom: 20px; border-bottom: 2px solid #e9eff6; padding-bottom: 10px;}
 
-  <p>
-    Towards Latent Progression Independent of Relapse Activity (LaPIRA).<br>
-    More content will follow.
-  </p>
+        /* Visualization Area */
+        #visualization-area { flex: 2; background: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); position: relative;}
+
+        /* Input Styling */
+        .input-group { margin-bottom: 20px; padding: 15px; border: 1px solid #e9eff6; border-radius: 4px; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; color: #333; }
+        .input-slider-container { display: flex; align-items: center; gap: 15px; }
+        input[type="range"] { flex-grow: 1; height: 6px; -webkit-appearance: none; background: #ccc; border-radius: 3px;}
+
+        /* SVG for Visualization (Simulated 3D space) */
+        #latent-space { width: 100%; height: 500px; border: 2px solid #005A87; }
+        .point { transition: all 0.5s ease-out; cursor: pointer; }
+        .z1-axis, .z2-axis { stroke: #ccc; stroke-width: 1px; }
+        .dotted-line { stroke: orange; stroke-dasharray: 5, 5; stroke-width: 2; opacity: 0.7;}
+
+    </style>
+
+<div class="container">
+
+    <!-- INPUT CONTROLS (TIMEPOINT 2) -->
+    <div id="controls">
+        <h3>Multimodal input information</h3>
+        <p style="font-size: small; color: #555;">Adjust these variables to simulate the patient's current state. The position, size, and color reflect its complex projection in the latent space.</p>
+
+        <!-- Clinical Data -->
+        <h4 style="margin-top: 20px;">🩺 Symptomatic Variables</h4>
+        <div class="input-group">
+            <label for="edss">EDSS Score (Disability):</label>
+            <div class="input-slider-container">
+                <span id="edss-value">1.5</span>
+                <input type="range" id="edss" min="0.5" max="9.5" value="1.5" step="0.1" oninput="updateLatentSpace()">
+            </div>
+        </div>
+
+        <!-- Cognitive Data -->
+        <div class="input-group">
+            <label for="sdmt">SDMT Score (Cognition):</label>
+            <div class="input-slider-container">
+                <span id="sdmt-value">15</span>
+                <input type="range" id="sdmt" min="4" max="20" value="15" step="1" oninput="updateLatentSpace()">
+            </div>
+        </div>
+
+         <!-- System/Fatigue Data -->
+        <div class="input-group">
+            <label for="fmsc">FSMC Score (Fatigue):</label>
+            <div class="input-slider-container">
+                <span id="fmsc-value">5</span>
+                <input type="range" id="fmsc" min="0" max="20" value="5" step="1" oninput="updateLatentSpace()">
+            </div>
+        </div>
+
+        <!-- Structural Data -->
+        <h4 style="margin-top: 20px;">🧠 Imaging & System Inputs</h4>
+        <div class="input-group">
+            <label for="atrophy">Atrophy Factor (T1 MRI):</label>
+            <div class="input-slider-container">
+                <span id="atrophy-value">0.25</span>
+                <input type="range" id="atrophy" min="0.0" max="0.8" value="0.25" step="0.01" oninput="updateLatentSpace()">
+            </div>
+        </div>
+
+    </div >
+
+    <!-- VISUALIZATION AREA -->
+    <div id="visualization-area">
+        <h3 style="margin-top: 0;">🌐 Latent PIRA (LaPIRA) Projection</h3>
+        <p style="font-size: small; color: #555;">The plot maps the patient's state relative to a fixed baseline. The patient moves in the latent space across 3 latent dimensions: L/R (Z<sub>1</sub>), Up/Down (Z<sub>1</sub>) and Forward/Backward (dot size, Z<sub>3</sub>).</p>
+
+        <!-- SVG Canvas for 3D Simulation -->
+        <svg id="latent-space" viewBox="0 0 800 500">
+            <!-- X-axis (Motor/Disability State) -->
+            <line class="z1-axis" x1="0" y1="250" x2="800" y2="250" />
+            <text x="800" y="265" font-size="14" fill="#333">Z₁: Motor/Disability State</text>
+
+            <!-- Y-axis (Cognitive State) -->
+            <line class="z2-axis" x1="400" y1="0" x2="400" y2="500" />
+            <text x="30" y="50" font-size="14" fill="#333">Z₂: Cognitive State</text>
+
+            <!-- Origin Label -->
+             <text x="400" y="515" font-size="12" fill="#666">Origin (Zero State)</text>
+
+            <!-- Points will be injected here by JS -->
+        </svg>
+    </div >
+</div>
+
+<script>
+    // ======================== JAVASCRIPT LOGIC (THE SIMULATOR) =======================
+
+    const SVG_WIDTH = 800;
+    const SVG_HEIGHT = 500;
+    const CENTER_X = SVG_WIDTH / 2;
+    const CENTER_Y = SVG_HEIGHT / 2;
+
+    // Fixed Point (Timepoint T1 - The Baseline)
+    // These represent the *logical* baseline values used for calculation, allowing a wider visible range.
+    const BASELINE_Z1 = 1.5; // EDSS 1.5 baseline state
+    const BASELINE_Z2 = 15;  // SDMT score at baseline
+    const BASELINE_Z3 = 0.25; // Baseline atrophy factor (fixed depth point)
+
+    let currentZ_T2 = null;
+
+
+    /**
+     * Calculates the three latent coordinates based on input variables.
+     * This function simulates MOGONet/GNN's feature extraction and fusion layer.
+     */
+    function calculateLatentCoordinates(edss, sdmt, atrophy, fmsc) {
+        // --- Z1 (X-Axis: Motor/Disability State) ---
+        let z1 = (parseFloat(edss) * 0.5) + (parseFloat(fmsc) / 40);
+
+        // --- Z2 (Y-Axis: Cognitive State) ---
+        // Inverted relationship for visualization logic: higher SDMT score -> lower cognitive state change on the axis.
+        let z2 = (20 - parseFloat(sdmt)) * 0.3;
+
+        // --- Z3 (Depth Axis): The Latent Systemic Complexity Score (PIRA Signal) ---
+        // This is where we model smoldering progression: a function of structural damage AND chronic symptoms.
+        let z3 = (parseFloat(atrophy) * 1.5) + (z1 / 4); // High Z3 indicates high systemic complexity/depth.
+
+        return { z1: z1, z2: z2, z3: z3 };
+    }
+
+
+    function updateLatentSpace() {
+        const edss = parseFloat(document.getElementById('edss').value);
+        const sdmt = parseFloat(document.getElementById('sdmt').value);
+        const atrophy = parseFloat(document.getElementById('atrophy').value);
+        const fmsc = parseFloat(document.getElementById('fmsc').value);
+
+        // 1. Calculate the current latent state (Z_T2) based on inputs
+        const z_t2 = calculateLatentCoordinates(edss, sdmt, atrophy, fmsc);
+        currentZ_T2 = z_t2;
+
+        // Update display values
+        document.getElementById('edss-value').innerText = edss.toFixed(1);
+        document.getElementById('sdmt-value').innerText = sdmt;
+        document.getElementById('atrophy-value').innerText = atrophy.toFixed(2);
+        document.getElementById('fmsc-value').innerText = fmsc;
+
+        // 2. Render the points and connections
+        renderLatentSpace();
+    }
+
+
+    function renderLatentSpace() {
+        const svg = document.getElementById('latent-space');
+        svg.innerHTML = ''; // Clear old points
+
+        if (!currentZ_T2) return;
+
+        // Helper function to map a Z value onto the SVG scale (0 to 800/500)
+        // The range scaling must be generous enough to ensure T1 is visible, even if it's outside standard viewing area.
+        function mapToSvg(z, min_val, max_val) {
+            return ((z - min_val) / (max_val - min_val)) * 800;
+        }
+
+        // --- Timepoint T1 (The Fixed Baseline Point) ---
+        const t1_x = mapToSvg(BASELINE_Z1, 0, 9.5); // Use a generous scale range for Z1
+        const t1_y = mapToSvg(BASELINE_Z2, 4, 20);
+
+        // Create T1 Point (Baseline - Standard Size/Opacity)
+        const t1Point = `<circle class="dot" cx="${t1_x}" cy="${SVG_HEIGHT - ((t1_y / SVG_HEIGHT) * SVG_HEIGHT)}" r="9" fill="#005A87" opacity="1"/>`;
+        svg.innerHTML += t1Point;
+
+        // --- Timepoint T2 (The Variable State Point) ---
+        const t2_x = mapToSvg(currentZ_T2.z1, 0, 9.5); // Z1 maps to X-axis
+        const t2_y = mapToSvg(currentZ_T2.z2, -16, 30); // Z2 maps to Y-axis
+
+        // DYNAMIC VISUALIZATION: Use Z3 (Structural Complexity) to control the visual attributes.
+        // Lower Z3 => larger, clearer dot -> less systemically complex/fewer interacting features.
+        // Higher Z3 => smaller, more subtle dot -> higher systemic complexity / "Smoldering" PIRA.
+        const dotRadius = 6 + (1 - currentZ_T2.z3) * 4;
+        const opacityLevel = Math.min(1, 0.5 + currentZ_T2.z3);
+
+        // Create T2 Point
+        const t2Point = `<circle class="dot" cx="${t2_x}" cy="${SVG_HEIGHT - ((t2_y / SVG_HEIGHT) * SVG_HEIGHT)}" r="${dotRadius}" fill="#F44336" opacity="${opacityLevel}"/>`;
+        svg.innerHTML += t2Point;
+
+        // --- The Connection (The Trajectory) ---
+        const line = `<line class="dotted-line" x1="${t1_x}" y1="${SVG_HEIGHT - ((t1_y / SVG_HEIGHT) * SVG_HEIGHT)}" x2="${t2_x}" y2="${SVG_HEIGHT - ((t2_y / SVG_HEIGHT) * SVG_HEIGHT)}"/>`;
+        svg.innerHTML += line;
+
+    }
+
+    // Initialize the visualization on load
+    window.onload = updateLatentSpace;
+</script>
+
 </section>
