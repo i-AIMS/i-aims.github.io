@@ -1,0 +1,594 @@
+---
+title: Mission
+nav: mission
+permalink: /mission/
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iAIMS — Network & Mission</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #ffffff;
+      color: #0a0a0a;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .node-group {
+      transition: transform 0.2s ease;
+      transform-box: fill-box;
+      transform-origin: center;
+      cursor: default;
+    }
+
+    .node-group:hover {
+      transform: scale(1.08);
+    }
+
+    .node-clickable {
+      cursor: pointer;
+    }
+
+    .edge-visible {
+      pointer-events: none;
+      transition: stroke-width 0.2s ease, stroke 0.2s ease;
+    }
+
+    .edge-hitarea {
+      cursor: help;
+      stroke: transparent;
+      fill: none;
+    }
+
+    .edge-group:hover .edge-visible {
+      stroke: #000000 !important;
+      stroke-width: 2.25px !important;
+    }
+
+    .edge-non-interactive {
+      pointer-events: none;
+    }
+
+    /* Pop-up box for hover */
+    #popup-box {
+      position: fixed;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      z-index: 50;
+      max-width: 310px;
+    }
+
+    #popup-box.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-black selection:text-white">
+
+  <!-- =====================================================================
+       YAML CONFIGURATION
+       Edit nodes, subnodes, bidirectional arrows, URLs, and pop-up text below.
+       ===================================================================== -->
+  <script type="text/yaml" id="iaims-config">
+    mission:
+      title: "iAIMS"
+      subtitle: "international community for AI in MS"
+      statement: >
+        iAIMS connects MS clinicians, scientists, people with MS, and AI developers
+          to assure universal AI literacy and clinically relevant AI developments.
+
+    about:
+      mission_text: >
+          iAIMS connects MS clinicians, scientists, people with MS, and AI developers
+          to assure universal AI literacy and clinically relevant AI developments.
+
+      vision_text: >
+          We work towards an ecosystem where AI tools don't end up in university libraries,
+          but improve the overall quality of life of people with MS.
+      deliverables:
+        - "Open-source: Open source datasets, methodological benchmarks, and reproducible pipelines for AI in MS."
+        - "Co-creation: Cross-community workshops and hackathons bridging tech, clinical, and patient groups."
+        - "State-of-the-art: The last academic and real-world developments in the AI x MS space"
+        - "AI literacy: Shared AI literacy resources and guidelines for safe clinical translation."
+
+    nodes:
+      # --- CENTER (Non-clickable core node) ---
+      - id: iaims
+        label: "iAIMS"
+        type: center
+        x: 500
+        y: 330
+        tooltip: "Central iAIMS hub connecting technical, clinical, and patient communities"
+
+      # --- THREE SURROUNDING COMMUNITIES (Non-clickable core hubs) ---
+      - id: tech_comm
+        label: "Technical Communities"
+        type: hub
+        x: 500
+        y: 155
+        tooltip: "AI, machine learning, and medical imaging communities"
+
+      - id: clinical_comm
+        label: "Clinical Communities"
+        type: hub
+        x: 725
+        y: 455
+        tooltip: "MS clinicians, researchers, and neurology societies"
+
+      - id: patient_comm
+        label: "Patient Communities"
+        type: hub
+        x: 275
+        y: 455
+        tooltip: "People living with MS and patient advocacy organizations"
+
+      # --- TECHNICAL SUBNODES ---
+      - id: miccai
+        label: "MICCAI"
+        type: sub
+        x: 340
+        y: 75
+        url: "https://miccai.org/"
+        tooltip: "Medical Image Computing and Computer Assisted Intervention"
+
+      - id: midl
+        label: "MIDL"
+        type: sub
+        x: 500
+        y: 50
+        url: "https://www.midl.io/"
+        tooltip: "Medical Imaging with Deep Learning"
+
+      - id: ohbm
+        label: "OHBM"
+        type: sub
+        x: 660
+        y: 75
+        url: "https://www.humanbrainmapping.org/"
+        tooltip: "Organization for Human Brain Mapping"
+
+      - id: ismrm
+        label: "ISMRM"
+        type: sub
+        x: 785
+        y: 150
+        url: "https://www.ismrm.org/"
+        tooltip: "International Society for Magnetic Resonance in Medicine"
+
+      # --- CLINICAL SUBNODES ---
+      - id: ectrims
+        label: "ECTRIMS"
+        type: sub
+        x: 885
+        y: 365
+        url: "https://ectrims.eu/"
+        tooltip: "European Committee for Treatment and Research in Multiple Sclerosis"
+
+      - id: actrims
+        label: "ACTRIMS Forum"
+        type: sub
+        x: 870
+        y: 530
+        url: "https://www.actrims.org/"
+        tooltip: "Americas Committee for Treatment and Research in Multiple Sclerosis"
+
+      - id: rims
+        label: "RIMS"
+        type: sub
+        x: 725
+        y: 595
+        url: "https://www.eurims.org/"
+        tooltip: "Rehabilitation in Multiple Sclerosis"
+
+      # --- PATIENT SUBNODES ---
+      - id: emsp
+        label: "EMSP"
+        type: sub
+        x: 115
+        y: 365
+        url: "https://emsp.org/"
+        tooltip: "European Multiple Sclerosis Platform"
+
+      - id: msif
+        label: "MSIF"
+        type: sub
+        x: 130
+        y: 530
+        url: "https://www.msif.org/"
+        tooltip: "Multiple Sclerosis International Federation"
+
+      - id: shiftms
+        label: "shift.ms"
+        type: sub
+        x: 205
+        y: 600
+        url: "https://shift.ms/"
+        tooltip: "shift.ms"
+
+    edges:
+      # --- iAIMS <-> TECHNICAL COMMUNITIES (Two opposite arrows) ---
+      - source: iaims
+        target: tech_comm
+        primary: true
+        arrow: true
+        tooltip: "Sharing AI in MS problem definitions, open benchmarks, and collaborative research priorities with technical communities."
+
+      - source: tech_comm
+        target: iaims
+        primary: true
+        arrow: true
+        tooltip: "Bringing cutting-edge AI architectures, imaging methods, and technical expertise into iAIMS."
+
+      # --- iAIMS <-> CLINICAL COMMUNITIES (Two opposite arrows) ---
+      - source: iaims
+        target: clinical_comm
+        primary: true
+        arrow: true
+        tooltip: "Translating AI prototypes, validation insights, and AI literacy resources into clinical MS care."
+
+      - source: clinical_comm
+        target: iaims
+        primary: true
+        arrow: true
+        tooltip: "Guiding iAIMS with clinical workflows, diagnostic challenges, and real-world patient care needs."
+
+      # --- iAIMS <-> PATIENT COMMUNITIES (Two opposite arrows) ---
+      - source: iaims
+        target: patient_comm
+        primary: true
+        arrow: true
+        tooltip: "Sharing accessible AI tools and co-designed outputs with people living with MS, as well as boosting AI literacy."
+
+      - source: patient_comm
+        target: iaims
+        primary: true
+        arrow: true
+        tooltip: "Shaping iAIMS around lived experiences, daily priorities, and meaningful outcomes for people with MS."
+
+      # --- SECONDARY SUB-COMMUNITY LINKS (Non-interactive) ---
+      - source: tech_comm
+        target: miccai
+        primary: false
+
+      - source: tech_comm
+        target: midl
+        primary: false
+
+      - source: tech_comm
+        target: ohbm
+        primary: false
+
+      - source: tech_comm
+        target: ismrm
+        primary: false
+
+      - source: clinical_comm
+        target: ectrims
+        primary: false
+
+      - source: clinical_comm
+        target: actrims
+        primary: false
+
+      - source: clinical_comm
+        target: rims
+        primary: false
+
+      - source: patient_comm
+        target: emsp
+        primary: false
+
+      - source: patient_comm
+        target: msif
+        primary: false
+
+      - source: patient_comm
+        target: shiftms
+        primary: false
+  </script>
+
+  <main class="w-full max-w-5xl mx-auto px-6 pt-12 pb-12 flex-1 flex flex-col items-center">
+    <header class="text-center max-w-2xl mx-auto mb-8">
+      <p id="mission-subtitle" class="text-xs uppercase tracking-[0.2em] text-neutral-500 mb-2 font-medium"></p>
+      <h1 id="mission-title" class="text-3xl md:text-4xl font-light tracking-tight text-black mb-4"></h1>
+      <div class="w-8 h-[1px] bg-black mx-auto mb-4"></div>
+      <p id="mission-statement" class="text-sm md:text-base leading-relaxed text-neutral-700 font-light"></p>
+    </header>
+
+    <section aria-label="iAIMS Ecosystem Network" class="w-full flex flex-col items-center">
+      <div class="w-full max-w-4xl">
+        <svg id="network-svg" viewBox="0 0 1000 650" class="w-full h-auto block select-none overflow-visible">
+          <defs>
+            <pattern id="subtle-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <circle cx="1" cy="1" r="0.6" fill="#e5e5e5" />
+            </pattern>
+
+            <marker
+              id="arrow-core"
+              viewBox="0 0 10 10"
+              refX="7"
+              refY="5"
+              markerWidth="6"
+              markerHeight="6"
+              orient="auto-start-reverse"
+            >
+              <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#111111" />
+            </marker>
+          </defs>
+
+          <rect width="1000" height="650" fill="url(#subtle-grid)" opacity="0.6" />
+          <g id="edges-layer"></g>
+          <g id="nodes-layer"></g>
+        </svg>
+      </div>
+    </section>
+
+    <section aria-label="Mission, Vision, and Deliverables" class="w-full max-w-3xl mx-auto mt-14 pt-10 border-t border-neutral-200 space-y-8 text-left">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h2 class="text-sm uppercase tracking-[0.15em] font-bold text-black mb-2.5">Mission Statement</h2>
+          <p id="about-mission" class="text-sm leading-relaxed text-neutral-700 font-light"></p>
+        </div>
+        <div>
+          <h2 class="text-sm uppercase tracking-[0.15em] font-bold text-black mb-2.5">Vision Statement</h2>
+          <p id="about-vision" class="text-sm leading-relaxed text-neutral-700 font-light"></p>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="text-sm uppercase tracking-[0.15em] font-bold text-black mb-3">Deliverables</h2>
+        <ul id="about-deliverables" class="list-disc pl-5 space-y-2 text-sm leading-relaxed text-neutral-700 font-light marker:text-black"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="w-full py-6 text-center text-[11px] text-neutral-400 tracking-wider uppercase">
+    &copy; <span id="year"></span> iAIMS
+  </footer>
+
+  <!-- Hover Pop-Up Box -->
+  <div
+    id="popup-box"
+    class="bg-white text-black border border-black px-4 py-3 rounded-md shadow-md text-xs leading-relaxed"
+    role="tooltip"
+  >
+    <div id="popup-title" class="text-[10px] uppercase tracking-wider text-neutral-500 mb-1 font-semibold"></div>
+    <div id="popup-body" class="text-neutral-900 font-normal"></div>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    (function initNetwork() {
+      const SVG_NS = 'http://www.w3.org/2000/svg';
+      const config = jsyaml.load(document.getElementById('iaims-config').textContent);
+
+      if (config.mission) {
+        document.getElementById('mission-title').textContent = config.mission.title || '';
+        document.getElementById('mission-subtitle').textContent = config.mission.subtitle || '';
+        document.getElementById('mission-statement').textContent = (config.mission.statement || '').trim();
+      }
+
+      if (config.about) {
+        document.getElementById('about-mission').textContent = (config.about.mission_text || '').trim();
+        document.getElementById('about-vision').textContent = (config.about.vision_text || '').trim();
+        const listEl = document.getElementById('about-deliverables');
+        (config.about.deliverables || []).forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          listEl.appendChild(li);
+        });
+      }
+
+      const edgesLayer = document.getElementById('edges-layer');
+      const nodesLayer = document.getElementById('nodes-layer');
+      const popupBox = document.getElementById('popup-box');
+      const popupTitle = document.getElementById('popup-title');
+      const popupBody = document.getElementById('popup-body');
+
+      const nodeMap = new Map((config.nodes || []).map((n) => [n.id, n]));
+
+      function showPopup(e, title, body) {
+        if (!body) return;
+        popupTitle.textContent = title;
+        popupBody.textContent = body;
+        popupBox.classList.add('visible');
+        movePopup(e);
+      }
+
+      function movePopup(e) {
+        const offset = 14;
+        const rect = popupBox.getBoundingClientRect();
+        const left = Math.min(window.innerWidth - rect.width - 12, Math.max(12, e.clientX + offset));
+        const top = Math.min(window.innerHeight - rect.height - 12, Math.max(12, e.clientY + offset));
+        popupBox.style.left = `${left}px`;
+        popupBox.style.top = `${top}px`;
+      }
+
+      function hidePopup() {
+        popupBox.classList.remove('visible');
+      }
+
+      function createSvgEl(tag, attrs = {}) {
+        const el = document.createElementNS(SVG_NS, tag);
+        Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+        return el;
+      }
+
+      // Detect opposing pairs so arrows curve cleanly in opposite directions
+      const edgeList = config.edges || [];
+      const pairCount = new Map();
+      edgeList.forEach((edge) => {
+        const key = [edge.source, edge.target].sort().join('::');
+        pairCount.set(key, (pairCount.get(key) || 0) + 1);
+      });
+
+      // Render edges
+      edgeList.forEach((edge) => {
+        const src = nodeMap.get(edge.source);
+        const dst = nodeMap.get(edge.target);
+        if (!src || !dst) return;
+
+        const isPrimary = Boolean(edge.primary);
+        const hasArrow = Boolean(edge.arrow);
+        const key = [edge.source, edge.target].sort().join('::');
+        const isOpposingPair = pairCount.get(key) > 1;
+
+        const dx = dst.x - src.x;
+        const dy = dst.y - src.y;
+        const len = Math.hypot(dx, dy) || 1;
+        const nx = -dy / len;
+        const ny = dx / len;
+
+        const curveOffset = isOpposingPair ? 28 : 0;
+        const endSpread = isOpposingPair ? 5 : 0;
+
+        const rSrc = !hasArrow ? (src.type === 'center' ? 31 : src.type === 'hub' ? 18 : 11) : (src.type === 'center' ? 33 : 20);
+        const rDst = !hasArrow ? (dst.type === 'center' ? 31 : dst.type === 'hub' ? 18 : 11) : (dst.type === 'center' ? 35 : 22);
+
+        const sx = src.x + (dx / len) * rSrc + nx * endSpread;
+        const sy = src.y + (dy / len) * rSrc + ny * endSpread;
+        const tx = dst.x - (dx / len) * rDst + nx * endSpread;
+        const ty = dst.y - (dy / len) * rDst + ny * endSpread;
+
+        const cx = (sx + tx) / 2 + nx * curveOffset;
+        const cy = (sy + ty) / 2 + ny * curveOffset;
+
+        const pathData = curveOffset !== 0
+          ? `M ${sx} ${sy} Q ${cx} ${cy} ${tx} ${ty}`
+          : `M ${sx} ${sy} L ${tx} ${ty}`;
+
+        // Secondary edges have no interactivity
+        if (!isPrimary) {
+          const secondaryGroup = createSvgEl('g', { class: 'edge-non-interactive' });
+          secondaryGroup.appendChild(createSvgEl('path', {
+            d: pathData,
+            fill: 'none',
+            class: 'edge-visible',
+            stroke: '#999999',
+            'stroke-width': '1',
+            'stroke-dasharray': '3 3'
+          }));
+          edgesLayer.appendChild(secondaryGroup);
+          return;
+        }
+
+        const g = createSvgEl('g', { class: 'edge-group' });
+        const visibleAttrs = {
+          d: pathData,
+          fill: 'none',
+          class: 'edge-visible',
+          stroke: '#111111',
+          'stroke-width': '1.5'
+        };
+        if (hasArrow) {
+          visibleAttrs['marker-end'] = 'url(#arrow-core)';
+        }
+
+        g.appendChild(createSvgEl('path', visibleAttrs));
+
+        const hit = createSvgEl('path', {
+          d: pathData,
+          'stroke-width': '18',
+          class: 'edge-hitarea'
+        });
+        hit.addEventListener('mouseenter', (e) => {
+          const relationLabel = hasArrow ? `${src.label} → ${dst.label}` : `${src.label} — ${dst.label}`;
+          showPopup(e, relationLabel, edge.tooltip);
+        });
+        hit.addEventListener('mousemove', movePopup);
+        hit.addEventListener('mouseleave', hidePopup);
+        g.appendChild(hit);
+
+        edgesLayer.appendChild(g);
+      });
+
+      // Render nodes
+      (config.nodes || []).forEach((node) => {
+        const isCenter = node.type === 'center';
+        const isHub = node.type === 'hub';
+        const isDark = isCenter || isHub;
+        const isCoreNode = isCenter || isHub;
+        const isClickable = !isCoreNode && Boolean(node.url);
+        const radius = isCenter ? 24 : isHub ? 18 : 11;
+
+        const group = createSvgEl('g', {
+          class: `node-group ${isClickable ? 'node-clickable' : ''}`
+        });
+
+        if (isCenter) {
+          group.appendChild(createSvgEl('circle', {
+            cx: node.x,
+            cy: node.y,
+            r: radius + 7,
+            fill: 'none',
+            stroke: '#0a0a0a',
+            'stroke-width': '1',
+            'stroke-dasharray': '3 3',
+            opacity: '0.65'
+          }));
+        }
+
+        group.appendChild(createSvgEl('circle', {
+          cx: node.x,
+          cy: node.y,
+          r: radius,
+          fill: isDark ? '#0a0a0a' : '#ffffff',
+          stroke: '#0a0a0a',
+          'stroke-width': isDark ? '1.5' : '1.25'
+        }));
+
+        const labelY = node.y + radius + 18;
+        const labelAttrs = {
+          x: node.x,
+          y: labelY,
+          'text-anchor': 'middle',
+          'font-size': node.type === 'sub' ? '11' : '12.5',
+          'font-weight': isDark ? '600' : '400'
+        };
+
+        const halo = createSvgEl('text', {
+          ...labelAttrs,
+          stroke: '#ffffff',
+          'stroke-width': '5',
+          'stroke-linejoin': 'round',
+          fill: '#ffffff'
+        });
+        halo.textContent = node.label;
+
+        const text = createSvgEl('text', {
+          ...labelAttrs,
+          fill: isDark ? '#000000' : '#333333'
+        });
+        text.textContent = node.label;
+
+        group.appendChild(halo);
+        group.appendChild(text);
+
+        const target = isClickable
+          ? createSvgEl('a', { href: node.url, 'aria-label': node.label })
+          : group;
+        if (isClickable) target.appendChild(group);
+
+        target.addEventListener('mouseenter', (e) => showPopup(e, node.label, node.tooltip));
+        target.addEventListener('mousemove', movePopup);
+        target.addEventListener('mouseleave', hidePopup);
+
+        nodesLayer.appendChild(target);
+      });
+    })();
+  </script>
+</body>
